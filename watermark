@@ -2,8 +2,8 @@
 #Config part
 PODPIS="Steve Illichevsky — still.ru@gmail.com"
 TEMP=~/Pictures/Uploadin
-USER=still-storm
-PASSWORD=wearepbd
+USER=****
+PASSWORD=*****
 #Working part
 yafotki -u $USER -p $PASSWORD --albums
 stty -icanon
