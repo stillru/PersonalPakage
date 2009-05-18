@@ -1,0 +1,30 @@
+#!/bin/bash
+#Config part
+PODPIS="Steve Illichevsky — still.ru@gmail.com"
+TEMP=~/Pictures/Uploadin
+USER=still-storm
+PASSWORD=wearepbd
+#Working part
+yafotki -u $USER -p $PASSWORD --albums
+stty -icanon
+echo -n "Enter a character: "
+readchar=`dd if=/dev/tty bs=1 count=2 2>/dev/null`
+stty icanon
+echo "\n"
+for JPG in *.*
+do
+echo Rotating $JPG
+jhead -q -autorot $JPG
+echo Adding watermark to $JPG
+exiftool -copyright='(C) 2009 Steve Illichevsky' $JPG
+ rm -fv *.*_original
+SIZE=`identify $JPG | awk '{print $3}' | sed 's/[^0-9]/ /g' | awk '{print $1}'`
+SIZE2=`expr $SIZE / 40`
+echo ========== размер $SIZE2
+convert $JPG -font /usr/share/fonts/truetype/msttcorefonts/Arial.ttf -pointsize $SIZE2 -auto-orient \
+-draw "gravity southwest \
+fill black text 0,12 '$PODPIS'\
+fill white text 1,11 '$PODPIS' " $TEMP/$JPG
+yafotki -u $USER -p $PASSWORD --album $readchar $TEMP/$JPG
+rm -fv $TEMP/$JPG
+done
