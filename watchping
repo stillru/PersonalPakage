@@ -80,7 +80,7 @@ ping=/usr/sbin/ping		# Location of ping
 timeout=5			# Default ping timeout, secs
 PATH=/bin:$PATH
 verbose=0			# setup defaults
-addr="root"
+addr="s.illichevsky@hogart.ru"
 email=1
 priority="user.err"
 syslog=1
@@ -137,16 +137,7 @@ webtext() {
 #	error if the email can't be sent (if allowed to syslog).
 #
 emailsend() {
-	mail $addr <<-END
-	Subject: WatchPing Alert:$dead
-	WatchPing Alert
-	
-	The following hosts failed to ping,
-	$dead
-	
-	Output from all pings,
-
-	$text
+	python /home/still/GIT/PersonalPakage/xsend.py Сервер\(а\) не отвечают, $dead 
 	END
 	if [ $? -ne 0 -a $syslog -eq 1 ]; then
 		logger -twatchping -p$syslog ERROR1: Emailing $addr
