@@ -14,7 +14,7 @@
 # -------------------------------------------------------------------------
  
 # add ip / hostname separated by white space
-HOSTS="patrockl ovidii margo gella master brut burn caesar zerghost sancho pansa"
+HOSTS="patrockl ovidii margo gella master brut burn caesar zerghost sancho pansa 10.10.5.250 10.10.5.251 10.10.5.252 10.10.5.253 10.10.5.245"
  
 # no ping request
 COUNT=2
@@ -24,8 +24,8 @@ do
   count=$(ping -c $COUNT -i 1 $myHost | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
   if [ $count -eq 0 ]; then
     # 100% failed
-    python xsend.py still-storm@ya.ru $myHost is down \(ping failed\) at $(date -R);
+    python /bin/xsend.py still-storm@ya.ru $myHost is down \(ping failed\) at $(date -R);
     else 
-    python xsend.py still-storm@ya.ru "All green at $myHost" ;
+    python /bin/xsend.py still-storm@ya.ru "All green at $myHost" ;
   fi
 done
