@@ -5,7 +5,7 @@
 <title></title>
 <meta name="generator" content="Bluefish 1.0.7">
 <meta name="author" content="still">
-<meta name="date" content="2010-07-05T13:25:37+0400">
+<meta name="date" content="2010-07-05T14:26:44+0400">
 <meta name="copyright" content="still.ru@gmail.com">
 <meta name="keywords" content="">
 <meta name="description" content="">
