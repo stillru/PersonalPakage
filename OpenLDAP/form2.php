@@ -15,6 +15,8 @@ $filename = "mega-lex.ru.ldif"; #CHMOD to 666
 $forward = 0; # redirect? 1 : yes || 0 : no
 $location = "thankyou.htm"; #set page to redirect to, if 1 is above
 # #
+##################### Transliterate #######################################
+
 ##################### No need to edit below this line ######################
 
 
@@ -30,7 +32,7 @@ $msg .= "objectClass: inetLocalMailRecipient" . "\n";
 $msg .= "objectClass: OpenLDAPperson" . "\n";
 $msg .= "company: MEGALEX_MOS_OFFICE" . "\n";
 $msg .= "o: MEGALEX_MOS_OFFICE" . "\n";
-$msg .= "homeDirectory: /mail/mega-lex.ru/victor" . "\n";
+$msg .= "homeDirectory: /mail/mega-lex.ru/" Transliterate($name) . "\n";
 $msg .= "maildrop: Maildir/" . "\n";
 $msg .= "mailAccessValue: OK" . "\n";
 $msg .= "uidNumber: 2000" . "\n";
