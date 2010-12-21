@@ -18,7 +18,10 @@ $location = "thankyou.htm"; #set page to redirect to, if 1 is above
 ##################### Transliterate #######################################
 
 ##################### No need to edit below this line ######################
+include "Translit.class.php";
 
+$translit = new Translit();
+echo $translit->Transliterate('$name');
 
 ## mail message ##
 
