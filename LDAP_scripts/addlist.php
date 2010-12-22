@@ -7,7 +7,7 @@ $ldapconfig['basedn'] = 'dc=mega-lex,dc=ru';
 $username=admin;
 $ds=ldap_connect($ldapconfig['host'], $ldapconfig['port']);
 
-$dn="uid=".$username.",ou=people,".$ldapconfig['basedn'];
+$dn="cn=".$username.",".$ldapconfig['basedn'];
 
 if ($bind=ldap_bind($ds, $dn, $password)) {
   echo("Login correct");
