@@ -86,9 +86,9 @@
         }
 
 $name = $_POST['name'];
-$en_name = translit($name);
+$en_name = strtolower(translit($name));
 $second = $_POST['second'];
-$en_second = translit($second);
+$en_second = strtolower(translit($second));
 $last = $_POST['last'];
 $dep = $_POST['dep'];
 $org = $_POST['org'];
@@ -104,22 +104,19 @@ $forward = 0; # redirect? 1 : yes || 0 : no
 $location = "thankyou.htm"; #set page to redirect to, if 1 is above
 # #
 ##################### No need to edit below this line ######################
-// $ds is a valid link identifier for a directory server
+############################ LDAP ##########################################
+$ldap_url = '192.168.1.201';
+$ldap_domain = 'mega-lex.ru';
+$ldap_dn = "o=MegaLex,l=Moscow,o=bd,dc=mega-lex,dc=ru";
 
-// $person is all or part of a person's name, eg "Jo"
+$ds = ldap_connect( $ldap_url );
 
-$dn = "ou=OFFICE, o=MegaLex, l=Moscow, o=bd, dc=mega-lex, dc=ru";
-$filter="(|(sn=$person*)(givenname=$person*))";
-$justthese = array("ou", "sn", "givenname", "mail");
+$username = "admin";
+//must always check that password length > 0
+$password = "Keep-Cooling"; 
 
-$sr=ldap_search($ds, $dn, $filter, $justthese);
+########################## END LDAP ########################################
 
-$info = ldap_get_entries($ds, $sr);
-
-echo $info["count"]." entries returned\n";
-
-
-## mail message ##
 
 $msg .= "dn: cn=$second $name, ou=OFFICE, o=MegaLex, l=Moscow, o=bd, dc=mega-lex, dc=ru" . "\n";
 $msg .= "objectClass: top" . "\n";
