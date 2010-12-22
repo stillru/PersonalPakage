@@ -26,7 +26,7 @@ if ($bind=ldap_bind($ds,$dn,$password)) {
   	//remember to turn on the anonymous search on the ldap server
   if ($bind=ldap_bind($ds)) {
 
-    $filter = "(cn=*)";
+    $filter = "(name=*)";
 
     if (!($search=@ldap_search($ds, $ldapconfig['basedn'], $filter))) {
       echo("Unable to search ldap server<br>");
