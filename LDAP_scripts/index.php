@@ -1,4 +1,8 @@
-<html><!-- DO NOT EDIT YOUR FORM HERE, PLEASE LOG IN AND EDIT AT FREEDBACK.COM -->
+<html>
+<head><title>LDAP Create LDIF</title>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta name="description" content="Only personal code">
+</head>
 <form method="post" action="form2.php">
 	<table cellspacing="5" cellpadding="5" border="0">
 		<tr>
@@ -7,7 +11,6 @@
 			</td>
 			<td valign="top">
 				<input type="text" name="name" id="name" size="40" value="" />
-				
 			</td>
 		</tr>
 		<tr>
@@ -16,7 +19,6 @@
 			</td>
 			<td valign="top">
 				<input type="text" name="second" id="second" size="40" value="" />
-				
 			</td>
 		</tr>
 		<tr>
@@ -25,7 +27,6 @@
 			</td>
 			<td valign="top">
 				<input type="text" name="last" id="last" size="40" value="" />
-				
 			</td>
 		</tr>
 		<tr>
@@ -34,7 +35,6 @@
 			</td>
 			<td valign="top">
 				<input type="text" name="org" id="org" size="40" value="Мегалекс" />
-				
 			</td>
 		</tr>
 		<tr>
@@ -43,7 +43,6 @@
 			</td>
 			<td valign="top">
 				<input type="text" name="tel" id="tel" size="40" value="" />
-				
 			</td>
 		</tr>
 		<tr>
@@ -52,7 +51,6 @@
 			</td>
 			<td valign="top">
 				<input type="text" name="mail2" id="mail2" size="40" value="" />
-				
 			</td>
 		</tr>
 		<tr>
@@ -73,7 +71,6 @@
 
                         </td>
                 </tr>
-
 		<tr>
                         <td valign="top">
                                 <strong>Адрес</strong>
@@ -92,7 +89,6 @@
 
                         </td>
                 </tr>
-
 		<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value=" Submit Form " />
@@ -102,4 +98,4 @@
 </form>
 <br><center><font face="Arial, Helvetica" size="1"><b>
 </b></font></center>
-</html><!-- End Freedback Form -->
+</body></html>
