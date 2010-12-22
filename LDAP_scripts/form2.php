@@ -104,6 +104,24 @@ $forward = 0; # redirect? 1 : yes || 0 : no
 $location = "thankyou.htm"; #set page to redirect to, if 1 is above
 # #
 ##################### No need to edit below this line ######################
+
+$ldap_url = '192.168.1.201';
+$ldap_domain = 'mega-lex.ru';
+$ldap_dn = "o=MegaLex,l=Moscow,o=bd,dc=mega-lex,dc=ru";
+
+$ds = ldap_connect( $ldap_url );
+ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+ldap_set_option($ds, LDAP_OPT_REFERRALS, 0);
+
+$username = "admin";
+//must always check that password length > 0
+$password = "Keep-Cooling"; 
+
+// now try a real login
+$login = ldap_bind( $ds, "$username@$ldap_domain", $password ); 
+ldap_unbind($ds);
+
+
 ############################ LDAP ##########################################
 $ldap_url = '192.168.1.201';
 $ldap_domain = 'mega-lex.ru';
