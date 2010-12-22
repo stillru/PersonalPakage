@@ -37,6 +37,15 @@
 				<input type="text" name="org" id="org" size="40" value="Мегалекс" />
 			</td>
 		</tr>
+                <tr>
+                        <td valign="top">
+                                <strong>Сотовый номер</strong>
+                        </td>
+                        <td valign="top">
+                                <input type="text" name="cellar" id="cellar" size="40" value="" />
+                        </td>
+                </tr>
+
 		<tr>
 			<td valign="top">
 				<strong>Внутренний номер</strong>
