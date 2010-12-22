@@ -1,5 +1,5 @@
 <html><!-- DO NOT EDIT YOUR FORM HERE, PLEASE LOG IN AND EDIT AT FREEDBACK.COM -->
-<form method="post" action="form2.php" accept-charset="UTF-8">
+<form method="post" action="form2.php">
 	<table cellspacing="5" cellpadding="5" border="0">
 		<tr>
 			<td valign="top">
@@ -51,7 +51,7 @@
 				<strong>Почтовый адрес</strong>
 			</td>
 			<td valign="top">
-				<input type="text" name="mail" id="mail" size="40" value="" />
+				<input type="text" name="mail2" id="mail2" size="40" value="" />
 				
 			</td>
 		</tr>
