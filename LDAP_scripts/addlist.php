@@ -1,4 +1,14 @@
+
 <html><!-- DO NOT EDIT YOUR FORM HERE, PLEASE LOG IN AND EDIT AT FREEDBACK.COM -->
+
+// LDAP variables
+$ldaphost = "192.168.1.201";  // your ldap servers
+$ldapport = 389;                 // your ldap server's port number
+
+// Connecting to LDAP
+$ldapconn = ldap_connect($ldaphost, $ldapport)
+          or die("Could not connect to $ldaphost");
+
 <form method="post" action="form2.php">
 	<table cellspacing="5" cellpadding="5" border="0">
 		<tr>
