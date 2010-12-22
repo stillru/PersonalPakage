@@ -1,3 +1,4 @@
+
 <?php
   /**
          * transliterate text
@@ -103,6 +104,19 @@ $forward = 0; # redirect? 1 : yes || 0 : no
 $location = "thankyou.htm"; #set page to redirect to, if 1 is above
 # #
 ##################### No need to edit below this line ######################
+// $ds is a valid link identifier for a directory server
+
+// $person is all or part of a person's name, eg "Jo"
+
+$dn = "ou=OFFICE, o=MegaLex, l=Moscow, o=bd, dc=mega-lex, dc=ru";
+$filter="(|(sn=$person*)(givenname=$person*))";
+$justthese = array("ou", "sn", "givenname", "mail");
+
+$sr=ldap_search($ds, $dn, $filter, $justthese);
+
+$info = ldap_get_entries($ds, $sr);
+
+echo $info["count"]." entries returned\n";
 
 
 ## mail message ##
