@@ -3,6 +3,34 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 <meta name="description" content="Only personal code">
 </head>
+<body>
+<?php
+$pageURL = 'http';
+if ($_SERVER["HTTPS"] == "on") {        
+    $pageURL .= "s";    
+}       
+$pageURL .= "://";      
+if ($_SERVER["SERVER_PORT"] != "80") {  
+    $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];    
+} else {        
+    $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];        
+}
+
+session_name('MYAPP');  
+session_start();        
+if (!isset($_SESSION["user"])) {        
+    include("LdapAuth.inc.php");        
+    $ldap=new LdapAuth();       
+    $ldap->setSessionAttr("user","name");        
+    $ldap->setSessionName("MYAPP");     
+    $ldap->setRedirectPage($pageURL); //page where we get redirected after login (in this case self)
+    include("LdapStandalonePageProtector.inc.php");
+}       
+else { 
+  echo "Logged In As: ".$_SESSION["user"]."</hr>";
+  //paste here the old page code (or write the new page to protect)
+?>
+
 <form method="post" action="form2.php">
 	<table cellspacing="5" cellpadding="5" border="0">
 		<tr>
@@ -108,3 +136,6 @@
 <br><center><font face="Arial, Helvetica" size="1"><b>
 </b></font></center>
 </body></html>
+<?php
+}
+?>
