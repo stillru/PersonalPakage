@@ -4,48 +4,18 @@
 <meta name="description" content="Only personal code">
 </head>
 <body>
-
-<?php
-$ldapconfig['host'] = '192.168.1.201';
-$ldapconfig['port'] = 389;
-$ldapconfig['basedn'] = 'dc=mega-lex,dc=ru';
-$password="Keeping-Cooler";
-$user=admin;
-$ds=ldap_connect($ldapconfig['host'], $ldapconfig['port']);
-$dn="cn=". $user .",". $ldapconfig['basedn'];
-if ($bind=ldap_bind($ds,$dn,$password)) {
-  echo("Login correct");
-} else {
-
-  echo("Unable to bind to server.</br>");
-
-  echo("msg:'".ldap_error($ds)."'</br>");
-	//check if the message isn't: Can't contact LDAP server :)
-  	//if it say something about a cn or user then you are trying with the wrong $dn pattern i found this by looking at OpenLDAP source code :)
-  	//we can figure out the right pattern by searching the user tree
-  	//remember to turn on the anonymous search on the ldap server
-  if ($bind=ldap_bind($ds)) {
-
-    $filter = "(name=*)";
-
-    if (!($search=@ldap_search($ds, $ldapconfig['basedn'], $filter))) {
-      echo("Unable to search ldap server<br>");
-      echo("msg:'".ldap_error($ds)."'</br>");#check the message again
-    } else {
-      $number_returned = ldap_count_entries($ds,$search);
-      $info = ldap_get_entries($ds, $search);
-      echo "The number of entries returned is ". $number_returned."<p>";
-      for ($i=0; $i<$info["count"]; $i++) {
-
-        var_dump($info[$i]);//look for your user account in this pile of junk and apply the whole pattern where you build $dn to match exactly the ldap tree entry
-      }
-    }
-  } else {
-    echo("Unable to bind anonymously<br>");
-    echo("msg:".ldap_error($ds)."<br>");
-  }
-}
-?>
+<form action="address.php" method="POST">
+<table cellspacing="5" cellpadding="5" border="0">
+                <tr>
+                        <td valign="top">
+                                <strong>Поиск:</strong>
+                        </td>
+                       <td valign="top">
+                               	<input type="text" name="name1" length="30">
+				<input type="submit" name="submit" value = "Search">
+                        </td>
+                </tr>
+</table></form>
 <form method="post" action="form2.php">
 	<table cellspacing="5" cellpadding="5" border="0">
 		<tr>
@@ -144,6 +114,7 @@ if ($bind=ldap_bind($ds,$dn,$password)) {
 		<tr>
 			<td colspan="2" align="center">
 				<input type="submit" value=" Submit Form " />
+                                <input type="submit" value=" Search " action="address.php" />
 			</td>
 		</tr>
 	</table>

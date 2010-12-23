@@ -1,4 +1,3 @@
-
 <?php
   /**
          * transliterate text
@@ -92,6 +91,7 @@ $en_second = strtolower(translit($second));
 $last = $_POST['last'];
 $dep = $_POST['dep'];
 $org = $_POST['org'];
+$mail = "$en_second.$en_name[0]@mega-lex.ru";
 $mail2 = $_POST['mail2'];
 $tel = $_POST['tel'];
 $cellar = $_POST['cellar'];
@@ -105,7 +105,65 @@ $forward = 0; # redirect? 1 : yes || 0 : no
 $location = "thankyou.htm"; #set page to redirect to, if 1 is above
 # #
 ##################### No need to edit below this line ######################
+$ldapconfig['host'] = '192.168.1.201';
+$ldapconfig['port'] = 389;
+$ldapconfig['basedn'] = 'dc=mega-lex,dc=ru';
+$password="Keeping-Cooler";
+$user="admin";
+$ds=ldap_connect($ldapconfig['host'], $ldapconfig['port']);
+ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+$dn="cn=". $user .",". $ldapconfig['basedn'];
+$re = ldap_bind($ds,$dn,$password) or die("Could not bind to server");     
 
+    $ldaprecord['cn'] = "$second "."$name";
+    $ldaprecord['givenName'] = "$name";
+    $ldaprecord['sn'] = "$second";
+    $ldaprecord['objectclass'][0] = "top";
+    $ldaprecord['objectclass'][1] = "person";
+    $ldaprecord['objectclass'][2] = "organizationalPerson";
+    $ldaprecord['objectclass'][3] = "inetOrgPerson";
+    $ldaprecord['objectclass'][4] = "posixAccount";
+    $ldaprecord['objectclass'][5] = "inetLocalMailRecipient";
+    $ldaprecord['objectclass'][6] = "OpenLDAPperson";
+    $ldaprecord['company'] = "MEGALEX_MOS_OFFICE";
+    $ldaprecord['o'] = "MEGALEX_MOS_OFFICE";
+    $ldaprecord['homeDirectory'] = "/mail/mega-lex.ru/$en_second.$en_name[0]";
+    $ldaprecord['maildrop'] = "Maildir/";
+    $ldaprecord['mailAccessValue'] = "OK";
+    $ldaprecord['uidNumber'] = "2000";
+    $ldaprecord['gidNumber'] = "2000";
+    $ldaprecord['mailAliasKey'] = "all@mega-lex.ru";
+    $ldaprecord['cn'] = "$second $name";
+    $ldaprecord['sn'] = "$second";
+    $ldaprecord['givenName'] = "$name";
+    $ldaprecord['initials'] = "$last";
+    $ldaprecord['title'] = "$title";
+    $ldaprecord['telephoneNumber'][0] = "$tel";
+    $ldaprecord['telephoneNumber'][1] = "$cellar";
+    $ldaprecord['postalAddress'] = "$addres";
+    $ldaprecord['ou'] = "$dep";
+    $ldaprecord['department'] = "$dep";
+    $ldaprecord['mail'][0]= "$mail";
+    $ldaprecord['mail'][1]= "$mail2";
+    $ldaprecord['mailAliasValue'] = "$mail";
+    $ldaprecord['uid'] = "$mail";
+    $ldaprecord['mailquota'] = "1000000000";
+
+    $base_dn = "cn=$second $name, ou=OFFICE, o=MegaLex, l=Moscow, o=bd, dc=mega-lex, dc=ru";
+
+$r = ldap_add($ds, $base_dn, $ldaprecord);
+
+if($r) 
+{
+   echo "New entry with DN " . $base_dn . " added to LDAP directory."; } // else display error 
+else 
+{
+   echo "An error occurred. Error number " . ldap_errno($ds) . ": " .
+ldap_err2str(ldap_errno($ds));
+ }
+echo "</br>";
+ldap_close($ds);
+############################################################################
 
 $msg .= "dn: cn=$second $name, ou=OFFICE, o=MegaLex, l=Moscow, o=bd, dc=mega-lex, dc=ru" . "\n";
 $msg .= "objectClass: top" . "\n";
@@ -163,5 +221,4 @@ echo ("Thank you for submitting our form. We will get back to you as soon as pos
 else {
 "Error processing form. Please contact the webmaster";
 };
-
 ?>
