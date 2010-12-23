@@ -98,6 +98,7 @@ $cellar = $_POST['cellar'];
 $addres = $_POST['addres'];
 $pass = $_POST['pass'];
 $title = $_POST['title'];
+$userpassword = "{SHA}" . base64_encode( pack( "H*", sha1( $pass ) ) );
 ###################### Set up the following variables ######################
 # #
 $filename = "data/mega-lex.ru-$en_second.$en_name[0].ldif"; #CHMOD to 666
@@ -148,6 +149,7 @@ $re = ldap_bind($ds,$dn,$password) or die("Could not bind to server");
     $ldaprecord['mailAliasValue'] = "$mail";
     $ldaprecord['uid'] = "$mail";
     $ldaprecord['mailquota'] = "1000000000";
+    $ldaprecord['userPassword'] = "$userpassword";
 
     $base_dn = "cn=$second $name, ou=OFFICE, o=MegaLex, l=Moscow, o=bd, dc=mega-lex, dc=ru";
 
@@ -196,12 +198,26 @@ $msg .= "mail: $mail2" . "\n";
 $msg .= "mailAliasValue: $en_second.$en_name[0]@mega-lex.ru" . "\n";
 $msg .= "uid: $en_second.$en_name[0]@mega-lex.ru" . "\n";
 $msg .= "mailquota: 1000000000" . "\n";
-
-$userpassword = "{SHA}" . base64_encode( pack( "H*", sha1( $pass ) ) ); 
-
-
 $msg .= "userPassword:$userpassword" . "\n";
 $msg .= "\n\n";
+
+$fname = fopen ("data/" . $en_second.".".$en_name, "a");
+if ($fname) {
+fwrite ($fname, "mega-lex.ru"."\t"."$en_second.$en_name[0]"."\n");
+fclose ($fname);
+}
+else {
+$forward = 2;
+};
+
+$findex = fopen ("data/mega-lex.ru", "a");
+if ($findex) {
+fwrite ($findex, "mega-lex.ru"."\t"."$name"."\t"."$pass"."\t"."$userpassword"."\n");
+fclose ($findex);
+}
+else {
+$forward = 2;
+};
 
 $fp = fopen ($filename, "a"); # w = write to the file only, create file if it does not exist, discard existing contents
 if ($fp) {
@@ -210,7 +226,7 @@ fclose ($fp);
 }
 else {
 $forward = 2;
-}
+};
 
 if ($forward == 1) {
 header ("Location:$location");
