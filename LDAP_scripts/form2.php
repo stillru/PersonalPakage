@@ -214,7 +214,7 @@ $forward = 2;
 
 $findex = fopen ("data/mega-lex.ru", "a");
 if ($findex) {
-fwrite ($findex, "mega-lex.ru"."\t"."$name"."\t"."$pass"."\t"."$userpassword"."\n");
+fwrite ($findex, "mega-lex.ru"."\t"."$en_second.$en_name[0]"."\t"."$name"."\t"."$pass"."\t"."$userpassword"."\t"."Дата создания:" . date('l jS \of F Y h:i:s A') ."\n");
 fclose ($findex);
 }
 else {
