@@ -106,11 +106,13 @@ $forward = 0; # redirect? 1 : yes || 0 : no
 $location = "thankyou.htm"; #set page to redirect to, if 1 is above
 # #
 ##################### No need to edit below this line ######################
+include inc.config.php
+/*
 $ldapconfig['host'] = '192.168.1.201';
 $ldapconfig['port'] = 389;
 $ldapconfig['basedn'] = 'dc=mega-lex,dc=ru';
 $password="Keeping-Cooler";
-$user="admin";
+$user="admin";*/
 $ds=ldap_connect($ldapconfig['host'], $ldapconfig['port']);
 ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
 $dn="cn=". $user .",". $ldapconfig['basedn'];
