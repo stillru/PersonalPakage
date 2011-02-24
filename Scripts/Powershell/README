@@ -1,4 +1,4 @@
-Directory for PowerShell Scripts
+п»їDirectory for PowerShell Scripts
 
 Yes, now i have computer with windows 7 on it and i can write some scripts on this shell :-)
 
@@ -7,4 +7,4 @@ diff.ps1 - Script for making diff's beetwin 2 files
 Search-Help.ps1 - Script for searching help in Powershell Documentation by keyword or reg-exp
 
 ###### TIP'S & TRIC'S ######
-Вызов PowerShell из любого командгого файла - PowerShell "& 'полный путь до скрипта.ps1' аргументы"
+Р’С‹Р·РѕРІ PowerShell РёР· Р»СЋР±РѕРіРѕ РєРѕРјР°РЅРґРіРѕРіРѕ С„Р°Р№Р»Р° - PowerShell "& 'РїРѕР»РЅС‹Р№ РїСѓС‚СЊ РґРѕ СЃРєСЂРёРїС‚Р°.ps1' Р°СЂРіСѓРјРµРЅС‚С‹"
