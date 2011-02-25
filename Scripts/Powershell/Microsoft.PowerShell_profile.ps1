@@ -56,30 +56,29 @@ function prompt {
 # SSH alias
 
 # Functions
-function connect ($hname){ 
-    $session = new-pssession $hname 
-    icm -session $session -scriptblock{ 
-    #remote profile script
-
-        function prompt 
-        { 
-            Write-Host $(Get-Date -Format [HH:mm:ss])  -NoNewline -ForegroundColor Blue 
-            write-host $(get-location) -nonewline -foregroundcolor green 
-            return ">" 
-        }
-	function script:append-path {
-	   if ( -not $env:PATH.contains($args) ) {
-      		$env:PATH += ';' + $args
-   		}
-	}
-	
-	$CYDWIN = 'C:\CygWIN\bin'
-	$env:EDITOR = 'nano'
-    	
-	append-path = 'CYDWIN'
-	} 
-    enter-pssession $session 
-}
+#function connect ($hname){ 
+#   $session = new-pssession -computername $hname -Credential still
+#   icm -session $session -scriptblock{ 
+#   #remote profile script
+#
+#       function prompt 
+#       { 
+#           Write-Host $(Get-Date -Format [HH:mm:ss])  -NoNewline -ForegroundColor Blue 
+#           write-host $(get-location) -nonewline -foregroundcolor green 
+#           return ">" 
+#       }	function script:append-path {
+#	   if ( -not $env:PATH.contains($args) ) {
+#      		$env:PATH += ';' + $args
+#   		}
+#	}
+#	
+#	$CYDWIN = 'C:\CygWIN\bin'
+#	$env:EDITOR = 'nano'
+#   	
+#	append-path = 'CYDWIN'
+#	} 
+#    enter-pssession $session -Credential:still 
+#}
 
 # Alias
 function connect-sever { Enter-PSSession -ComputerName:192.168.1.220 -Credential:SEVER\still }
