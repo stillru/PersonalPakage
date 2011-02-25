@@ -53,13 +53,33 @@ function prompt {
 
 	#"$env:username@$env:computername $(get-location):"
 
-#SSH alias
+# SSH alias
 
-Set-alias ssh_vlad 'plink.exe -pw weare still@95.66.157.198'
-Set-alias ssh_outgate '$TOOLS\plink -pw weare still@78.24.177.69'
-Set-alias ssh_gate '$TOOLS\plink -pw weare still@192.168.1.201'
-Set-alias ssh_help '$TOOLS\plink -pw weare still@192.168.1.101'
-Set-alias ssh_admin '$TOOLS\plink -pw weare still@192.168.1.127'
+# Functions
+function connect ($hname){ 
+    $session = new-pssession $hname 
+    icm -session $session -scriptblock{ 
+    #remote profile script
+
+        function prompt 
+        { 
+            Write-Host $(Get-Date -Format [HH:mm:ss])  -NoNewline -ForegroundColor Blue 
+            write-host $(get-location) -nonewline -foregroundcolor green 
+            return ">" 
+        }
+	function script:append-path {
+	   if ( -not $env:PATH.contains($args) ) {
+      		$env:PATH += ';' + $args
+   		}
+	}
+	
+	$CYDWIN = 'C:\CygWIN\bin'
+	$env:EDITOR = 'nano'
+    	
+	append-path = 'CYDWIN'
+	} 
+    enter-pssession $session 
+}
 
 # Alias
 function connect-sever { Enter-PSSession -ComputerName:192.168.1.220 -Credential:SEVER\still }
