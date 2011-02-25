@@ -1,4 +1,4 @@
-#
+#############################################################################
 ##
 ## New-SelfSignedCertificate.ps1
 ##
@@ -13,23 +13,30 @@
 ##
 ##############################################################################
 if(-not (Get-Command makecert.exe -ErrorAction SilentlyContinue))
-}
+{
     $errorMessage = "Could not find makecert.exe. " +
         "This tool is available as part of Visual Studio, or the Windows SDK."
     Write-Error $errorMessage
     return
-{
+}
 $keyPath = Join-Path ([IO.Path]::GetTempPath()) "root.pvk"
-## Generate the local certification authority
+# Generate the local certification authority
+
 makecert -n "CN=PowerShell Local Certificate Root" -a sha1 `
     -eku 1.3.6.1.5.5.7.3.3 -r -sv $keyPath root.cer `
     -ss Root -sr localMachine
-## Use the local certification authority to generate a self-signed
-## certificate
+
+# Use the local certification authority to generate a self-signed
+# certificate
+
 makecert -pe -n "CN=PowerShell User" -ss MY -a sha1 `
     -eku 1.3.6.1.5.5.7.3.3 -iv $keyPath -ic root.cer
-## Remove the private key from the filesystem.
+
+# Remove the private key from the filesystem.
+
 Remove-Item $keyPath
-## Retrieve the certificate
+
+# Retrieve the certificate
+
 Get-ChildItem cert:\currentuser\my -codesign |
     Where-Object { $_.Subject -match "PowerShell User" }
