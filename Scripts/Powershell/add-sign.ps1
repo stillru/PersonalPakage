@@ -1,33 +1,14 @@
-param( [string]$orgfile, [string]$diffile, [string]$switch )
-
-If ( $diffile -eq "" ) {
-	Write-Host
-	Write-Host "TxtComp.ps1,  Version 1.00"
-	Write-Host "Compare 2 text files and display the differences"
-	Write-Host
-	Write-Host "Usage:  .\TXTCOMP.PS1  file1  file2  [ /ALL ]"
-	Write-Host
-	Write-Host "Where:  file1 and file2  are the files to be compared"
-	Write-Host "        /ALL             display all lines, not just the differences"
-	Write-Host
-	Write-Host "Written by Rob van der Woude"
-	Write-Host "http://www.robvanderwoude.com"
-	Write-Host
-}
-Else {
-	If ( $switch -eq "/ALL" ) {
-		Compare-Object $( Get-Content $orgfile ) $( Get-Content $diffile ) -IncludeEqual
-	}
-	Else {
-		Compare-Object $( Get-Content $orgfile ) $( Get-Content $diffile )
-	}
-}
+## add-signature.ps1
+## Signs a file
+param([string] $file=$(throw "Please specify a filename."))
+$cert = @(Get-ChildItem cert:\CurrentUser\My -codesigning)[0]
+Set-AuthenticodeSignature $file $cert
 
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+wgdnEM6+Qly5Rw5jA+5Nuu9
-# NDigggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/EogY63hg+hYhozQR74DGjLF
+# UJCgggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDEwNTQ2MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDO0lfK8HOX
@@ -43,8 +24,8 @@ Else {
 # Q2VydGlmaWNhdGUgUm9vdAIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUlANQbQCiLawYLqeUvzlsWq4nycowDQYJKoZIhvcNAQEBBQAEgYAsm5hIPdvH
-# JxW0O486cPO/jxp/R5OKXk35AhFzw5aDiZq4B7A/euUoqqyXsgzfVmWR0vxOI5Gd
-# 9tQCRBJKBNXia/K7tf2Oow3k/pY27r3y57hxXlZk74uRiSzxf2GSaPwAM1yESJ1b
-# BGLdFkzZjwYSRQ+r2fA1514v7CkY/J2WuQ==
+# FgQUgXEBdQX2B4qdDL+mz2fmhmPnhSwwDQYJKoZIhvcNAQEBBQAEgYB+cb61KVNb
+# 9MS2tTjbeE+hMaCwAIDzUn8GIvc/wNv7x0+qdroaMfCpu4JuH4pjT3QqkR2yqxF+
+# 1AD0DFMYbkz2uYYJPJ8Z2s+Jm5tMX9hQ3+kycxLpVEdbJEV2tJlOR2AJD3HUYxp5
+# V/IHZkdQTZAptuwa1A+ANrVzY79zAcPBZQ==
 # SIG # End signature block
