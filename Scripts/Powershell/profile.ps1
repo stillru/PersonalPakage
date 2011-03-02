@@ -38,6 +38,24 @@ function get-adminuser() {
    return $p.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
+function Get-GitBranchNameWithStatusIndicator {
+  $statusOutput = Invoke-Expression 'git status 2>$null'  #1
+  if (!$statusOutput) { return } #2
+  $branch = $statusOutput[0] #3
+  if ($branch -eq "# Not currently on any branch.") {
+    $branch = "No branch"
+  } else {
+    $branch =  $branch.SubString("# On branch ".Length) 
+  }
+  $statusSummary = $statusOutput[-1] #4
+  if ($statusSummary -eq "nothing to commit (working directory clean)") { #5
+    $statusIndicator = "" 
+  } else {
+    $statusIndicator = "*"
+  }
+  return $branch + $statusIndicator
+}
+
 # Выведение приветствия
 
 function prompt {
@@ -55,6 +73,9 @@ function prompt {
    write-host '{' -n -f $cdelim
    write-host (shorten-path (pwd).Path) -n -f $cloc
    write-host '}' -n -f $cdelim
+   if ($gitStatus) {
+    Write-Host (" [" + $gitStatus +"]") -nonewline -foregroundcolor Gray
+   }
    return ' '
 }
 
