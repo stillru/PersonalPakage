@@ -9,7 +9,6 @@ $TOOLS = 'C:\Program Files\PuTTY'
 $CYDWIN = 'C:\CygWIN\bin'
 $env:EDITOR = 'nano'
 
-
 # Функция добавления переменных к переменной PATH
 
 function script:append-path { 
@@ -114,10 +113,25 @@ Else {
 }
 }
 
+######################################################################
+#
+# Function sudo
+#
+######################################################################
+function Sudo ()
+{
+	if ($args.Length -eq 1)
+	{
+		start-process $args[0] -verb "runAs"
+	}
+	if ($args.Length -gt 1)
+	{	
+		start-process $args[0] -ArgumentList $args[1..$args.Length] -verb "runAs"
+	}
+}
 
 # Определения Alias'ов
 function connect-sever { Enter-PSSession -ComputerName:192.168.1.220 -Credential:SEVER\still }
-
 Set-Alias new New-Object
 Set-Alias cmdSever connect-sever
 Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
@@ -128,8 +142,8 @@ Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUs+p2PnwXw9FZBim+GdnMgdq
-# 6NigggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUj9fxK1nExhQGgNPMJtxrF3Sb
+# DBagggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDEwNTQ2MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDO0lfK8HOX
@@ -145,8 +159,8 @@ Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
 # Q2VydGlmaWNhdGUgUm9vdAIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUQmIsGR6IqHtzq1mGAeVg1+xwb2YwDQYJKoZIhvcNAQEBBQAEgYBmWG2RKbbV
-# 6E6fCxQ9MB+WaMhCb+8sSdafz4cc65KzrcO5nndRZIcM6i2gvb/keh/aWf46RP8l
-# gVn9JFWgr8JHbl3i+quJEGuJpJCAZfR7ctUyfJdA3FAkY9ZKtZs/3XhM2yYtQwdU
-# trDy3dmzG86k9TPqgXeo+bkMCeIFwmqUNw==
+# FgQU4khhoBfG6A4nYH1qdtRGNCfzdpAwDQYJKoZIhvcNAQEBBQAEgYBNCweKXdWk
+# bLHou+/R1wq9/rR4e+AKnErj79BrfX37F5NmiRC8gechaUjOkqZiswd+ALOxAGAE
+# uFs54Y69Ex9KF7rvyMUV5s3RhSn0ehGKcTTRTolVLjseroli+OJPwYuYD09BL0nj
+# FXqrBUN4NBhj0Jwjmqpo8ONRHP5aU6CbiQ==
 # SIG # End signature block
