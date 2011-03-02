@@ -9,6 +9,37 @@ $TOOLS = 'C:\Program Files\PuTTY'
 $CYDWIN = 'C:\CygWIN\bin'
 $env:EDITOR = 'nano'
 
+Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
+
+# Load posh-git module from current directory
+Import-Module posh-git
+
+# If module is installed in a default location ($env:PSModulePath),
+# use this instead (see about_Modules for more information):
+# Import-Module posh-git
+
+
+# Set up a simple prompt, adding the git prompt parts inside git repos
+if(-not (Test-Path Function:\DefaultTabExpansion)) {
+    Rename-Item Function:\TabExpansion DefaultTabExpansion
+}
+
+# Set up tab expansion and include git expansion
+function TabExpansion($line, $lastWord) {
+    $lastBlock = [regex]::Split($line, '[|;]')[-1]
+    
+    switch -regex ($lastBlock) {
+        # Execute git tab completion for all git-related commands
+        'git (.*)' { GitTabExpansion $lastBlock }
+        # Fall back on existing tab expansion
+        default { DefaultTabExpansion $line $lastWord }
+    }
+}
+
+Enable-GitColors
+
+Pop-Location
+
 # Функция добавления переменных к переменной PATH
 
 function script:append-path { 
@@ -37,24 +68,6 @@ function get-adminuser() {
    return $p.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-function Get-GitBranchNameWithStatusIndicator {
-  $statusOutput = Invoke-Expression 'git status 2>$null'  #1
-  if (!$statusOutput) { return } #2
-  $branch = $statusOutput[0] #3
-  if ($branch -eq "# Not currently on any branch.") {
-    $branch = "No branch"
-  } else {
-    $branch =  $branch.SubString("# On branch ".Length) 
-  }
-  $statusSummary = $statusOutput[-1] #4
-  if ($statusSummary -eq "nothing to commit (working directory clean)") { #5
-    $statusIndicator = "" 
-  } else {
-    $statusIndicator = "*"
-  }
-  return $branch + $statusIndicator
-}
-
 # Выведение приветствия
 
 function prompt {
@@ -75,7 +88,7 @@ function prompt {
    if ($gitStatus) {
     Write-Host (" [" + $gitStatus +"]") -nonewline -foregroundcolor Gray
    }
-   return ' '
+   return '> '
 }
 
 
@@ -140,8 +153,8 @@ Add-PSSnapin NetCmdlets
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvviEu2hxAMe/pE0BrSGTbKKN
-# LW+gggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUl47vvGoItU1eRiHJ5MkTYRAk
+# DpmgggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDEwNTQ2MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDO0lfK8HOX
@@ -157,8 +170,8 @@ Add-PSSnapin NetCmdlets
 # Q2VydGlmaWNhdGUgUm9vdAIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUy5WvRbmeqjvO6XgNfUTF6IpvB+swDQYJKoZIhvcNAQEBBQAEgYCGEXB2bSPd
-# bvD1uhAEf6XLhR4oQ8wwA7MXZBOahnE2yVERU6im6SR6gXtSI10j6ximrDEIG+2y
-# 3kigidm8rwbR6Ge5tR5kpW59zqX9oNF3ycTUWJ96Z/+KiXOUJ/fNUReGEWIryFUB
-# LSgXVDUui+Ja2w5pQHZLwxpLPN333S63Fg==
+# FgQUNN3pnGYjUQwvin+QajFz/HeSukkwDQYJKoZIhvcNAQEBBQAEgYDHmGzQc+Iu
+# yP2umzBaxsdfNwmDK4SDW7zUNokMxlfYDXjqMAFMF+YZ+4SsraPKxtoMKwUjAVDg
+# +puD4lfLBukqRlmU6ObiEP2j/9iHOSThbNHmDvOW8YxFQTQPmwvIiIalendHR/e9
+# bRYLzi9eCiqVuyxhgIY0wZR1PXTxsAHaug==
 # SIG # End signature block
