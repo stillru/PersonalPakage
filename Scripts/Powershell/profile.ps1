@@ -131,18 +131,17 @@ function elevate-process
 # Определения Alias'ов
 function connect-sever { Enter-PSSession -ComputerName:192.168.1.220 -Credential:SEVER\still }
 Set-Alias new New-Object
-Set-Alias cmdSever connect-sever
 Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
+Set-Alias sudo elevate-process
 Add-PSSnapin NetCmdlets
-set-alias sudo elevate-process
 
 # Подпись :-)
 
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8Al7wzm0dXWCiE4lHCKahLar
-# UBugggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvviEu2hxAMe/pE0BrSGTbKKN
+# LW+gggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDEwNTQ2MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDO0lfK8HOX
@@ -158,8 +157,8 @@ set-alias sudo elevate-process
 # Q2VydGlmaWNhdGUgUm9vdAIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUtePufTT1ee1Cf4SJRsgq4uAwcdMwDQYJKoZIhvcNAQEBBQAEgYA0w9sZF5+g
-# XNREV+V9GoQe+Xrz7d85VKvtB14+5Evgj1zb+j5GAEago5GGtg2n+mXLELMa01NK
-# LiR1DmybuhT01qK582tLFEPBPM5iXhf7Sz9gjJ7YrymnZw0TeauGZUMzCEMOy8PP
-# xv5aWPDHK58cLrOfMictfd6RCAwK649BIQ==
+# FgQUy5WvRbmeqjvO6XgNfUTF6IpvB+swDQYJKoZIhvcNAQEBBQAEgYCGEXB2bSPd
+# bvD1uhAEf6XLhR4oQ8wwA7MXZBOahnE2yVERU6im6SR6gXtSI10j6ximrDEIG+2y
+# 3kigidm8rwbR6Ge5tR5kpW59zqX9oNF3ycTUWJ96Z/+KiXOUJ/fNUReGEWIryFUB
+# LSgXVDUui+Ja2w5pQHZLwxpLPN333S63Fg==
 # SIG # End signature block

@@ -15,18 +15,18 @@ $helpNames = $(Get-Help * | Where-Object { $_.category -ne "Alias" })
 
 foreach ($helpTopic in $helpNames)
 {
-        $content = Get-Help -Full $helpTopic.Name | Out-String
-        if($content -match $pattern)
+    $content = Get-Help -Full $helpTopic.Name | Out-String
+    if($content -match $pattern)
         {
-                $helpTopic | Select-Object Name,Synopsis
+            $helpTopic | Select-Object Name,Synopsis
         }
 }
 
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUftd2DWWQuvJgMbh7vIYQss57
-# Br6gggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMIx99VE7SFMHvXJ4u2VfQ/qs
+# qYCgggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDEwNTQ2MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDO0lfK8HOX
@@ -42,8 +42,8 @@ foreach ($helpTopic in $helpNames)
 # Q2VydGlmaWNhdGUgUm9vdAIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUX5NXULT7p+B1d25+2Npl4cJkpGkwDQYJKoZIhvcNAQEBBQAEgYA7dnHyMoN9
-# 8NijePaw3kA6DnCfHfFjl7FvWmjqCXV//sPm0DQAoxHszicciRGt17BD+B7mqWCZ
-# U3rMxijCAdkSjJUsy7gNqcmGP2JZDp7ww1DnEGxgzUGOfzQ+SvIHgvD1RBqLIfyY
-# 7op3qmK3ZkSsmdcVLO+drNLyHefheBgNPw==
+# FgQUJJ8Ol71PwL8PLKw3AKAixGeC9qswDQYJKoZIhvcNAQEBBQAEgYCXbs5GPcFv
+# 1iWGik13VR4RdWZKWF5d9xmAIC3wgFovu4rMJzRrgbfcpdkhY8kum2styqGA0PhO
+# 1TAl77drJAI5CUed4tPdHNJYEzI8ivv/Ax4qQsnkHPBguwlN7vzcejmQ7ckrrMln
+# G0r3hMuhdFbEJJUCL9nFVIPrBqGnlrugFA==
 # SIG # End signature block
