@@ -1,23 +1,28 @@
+# PowerShell Profile
+#
+# Editor: Steve Illichevsky 
+# Email:  still.ru@gmail.com
+# 
+# (c) 2010
+
 $TOOLS = 'C:\Program Files\PuTTY'
 $CYDWIN = 'C:\CygWIN\bin'
-Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
 $env:EDITOR = 'nano'
-#
-# set path to include my usual directories
-# and configure dev environment
-#
+
+
+# Функция добавления переменных к переменной PATH
+
 function script:append-path { 
    if ( -not $env:PATH.contains($args) ) {
       $env:PATH += ';' + $args
    }
 }
 
-
 append-path "$TOOLS"
 append-path "$CYDWIN"
-#
-# Define our prompt. Show '~' instead of $HOME
-#
+
+# Функции для определения вывода приветствия 
+
 function shorten-path([string] $path) {
    $loc = $path.Replace($HOME, '~')
    # remove prefix for UNC paths
@@ -32,6 +37,8 @@ function get-adminuser() {
    $p = New-Object Security.Principal.WindowsPrincipal($id)
    return $p.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
+
+# Выведение приветствия
 
 function prompt {
    # our theme
@@ -51,11 +58,14 @@ function prompt {
    return ' '
 }
 
-	#"$env:username@$env:computername $(get-location):"
 
-# SSH alias
+# Самоопределённые функции Functions
 
-# Functions
+###############################################################################
+#
+# Функция Get-Diff
+#
+###############################################################################
 function Get-Diff {
 param( [string]$orgfile, [string]$diffile, [string]$switch )
 
@@ -83,35 +93,15 @@ Else {
 }
 }
 
-#function connect ($hname){ 
-#   $session = new-pssession -computername $hname -Credential still
-#   icm -session $session -scriptblock{ 
-#   #remote profile script
-#
-#       function prompt 
-#       { 
-#           Write-Host $(Get-Date -Format [HH:mm:ss])  -NoNewline -ForegroundColor Blue 
-#           write-host $(get-location) -nonewline -foregroundcolor green 
-#           return ">" 
-#       }	function script:append-path {
-#	   if ( -not $env:PATH.contains($args) ) {
-#      		$env:PATH += ';' + $args
-#   		}
-#	}
-#	
-#	$CYDWIN = 'C:\CygWIN\bin'
-#	$env:EDITOR = 'nano'
-#   	
-#	append-path = 'CYDWIN'
-#	} 
-#    enter-pssession $session -Credential:still 
-#}
 
-# Alias
+# Определения Alias'ов
 function connect-sever { Enter-PSSession -ComputerName:192.168.1.220 -Credential:SEVER\still }
 
 Set-Alias new New-Object
 Set-Alias cmdSever connect-sever
+Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
+
+# Подпись :-)
 
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
