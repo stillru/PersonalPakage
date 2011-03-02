@@ -1,0 +1,21 @@
+ToDo
+
+### Bash
+
+* Script for send jabber messages to me if someone login as root
+
+### Perl
+
+* Try to write script for parsing danceguardian logfile, squid file
+
+### PowerShell
+
+* Add to scripts module to send Jabber notifications
+* Add script to clear TS Sessions
+* Simple keylogger
+
+####################################################################
+
+### For Github
+
+* Add Documentation, Coments, Help messages to my scripts 
