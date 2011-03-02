@@ -1,4 +1,4 @@
-# PowerShell Profile
+﻿# PowerShell Profile
 #
 # Editor: Steve Illichevsky 
 # Email:  still.ru@gmail.com
@@ -36,6 +36,40 @@ function TabExpansion($line, $lastWord) {
     }
 }
 
+# Выведение приветствия
+function prompt {
+# our theme
+   $cdelim = [ConsoleColor]::DarkCyan
+   if ( get-adminuser ) {
+      $chost = [ConsoleColor]::Red
+   } else {
+      $chost = [ConsoleColor]::Green
+   }
+   $cpref = [ConsoleColor]::Cyan
+   $cloc = [ConsoleColor]::Magenta
+
+   write-host $env:username@([net.dns]::GetHostName().ToLower()) -n -f $chost
+   write-host '{' -n -f $cdelim
+   write-host (shorten-path (pwd).Path) -n -f $cloc
+   write-host '}' -n -f $cdelim
+   # Git Prompt
+    $Global:GitStatus = Get-GitStatus
+    Write-GitStatus $GitStatus
+      
+    return "> "
+}
+
+#   if ($gitStatus) {
+#    Write-Host (" [" + $gitStatus +"]") -nonewline -foregroundcolor Gray
+#   }
+#   return '> '
+#}
+
+if(-not (Test-Path Function:\DefaultTabExpansion)) {
+    Rename-Item Function:\TabExpansion DefaultTabExpansion
+}
+
+
 Enable-GitColors
 
 Pop-Location
@@ -67,30 +101,6 @@ function get-adminuser() {
    $p = New-Object Security.Principal.WindowsPrincipal($id)
    return $p.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
-
-# Выведение приветствия
-
-function prompt {
-   # our theme
-   $cdelim = [ConsoleColor]::DarkCyan
-   if ( get-adminuser ) {
-      $chost = [ConsoleColor]::Red
-   } else {
-      $chost = [ConsoleColor]::Green
-   }
-   $cpref = [ConsoleColor]::Cyan
-   $cloc = [ConsoleColor]::Magenta
-
-   write-host $env:username@([net.dns]::GetHostName().ToLower()) -n -f $chost
-   write-host '{' -n -f $cdelim
-   write-host (shorten-path (pwd).Path) -n -f $cloc
-   write-host '}' -n -f $cdelim
-   if ($gitStatus) {
-    Write-Host (" [" + $gitStatus +"]") -nonewline -foregroundcolor Gray
-   }
-   return '> '
-}
-
 
 # Самоопределённые функции Functions
 
@@ -153,8 +163,8 @@ Add-PSSnapin NetCmdlets
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUl47vvGoItU1eRiHJ5MkTYRAk
-# DpmgggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrzIS7UaJL6vTgL9i7mpnmXiU
+# PiGgggI/MIICOzCCAaigAwIBAgIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDEwNTQ2MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDO0lfK8HOX
@@ -170,8 +180,8 @@ Add-PSSnapin NetCmdlets
 # Q2VydGlmaWNhdGUgUm9vdAIQDdu47s6KwahLMy9x/eoQPDAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUNN3pnGYjUQwvin+QajFz/HeSukkwDQYJKoZIhvcNAQEBBQAEgYDHmGzQc+Iu
-# yP2umzBaxsdfNwmDK4SDW7zUNokMxlfYDXjqMAFMF+YZ+4SsraPKxtoMKwUjAVDg
-# +puD4lfLBukqRlmU6ObiEP2j/9iHOSThbNHmDvOW8YxFQTQPmwvIiIalendHR/e9
-# bRYLzi9eCiqVuyxhgIY0wZR1PXTxsAHaug==
+# FgQUwqr1FEmjIyQ3WbHFfASJ3AwzorQwDQYJKoZIhvcNAQEBBQAEgYCevZoIFKhe
+# eKUzrgTblPQLLjWPs2QIja6Sox7uQs6/tr/e+HQ4KHKUwL8BM1CZ6J/P09GmxJ3o
+# kz/wzwEzjZ5fgEYPCcrSpBAKEWiswwqrLQJ9k/U3arFi1qqGF5uqcgqP5IYkO22m
+# 4IoK9mqrkfUeV/ftYXcreOyPneaqP/1qXw==
 # SIG # End signature block
