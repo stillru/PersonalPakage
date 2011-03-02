@@ -118,16 +118,14 @@ Else {
 # Function sudo
 #
 ######################################################################
-function Sudo ()
+function elevate-process
 {
-	if ($args.Length -eq 1)
-	{
-		start-process $args[0] -verb "runAs"
-	}
-	if ($args.Length -gt 1)
-	{	
-		start-process $args[0] -ArgumentList $args[1..$args.Length] -verb "runAs"
-	}
+	$file, [string]$arguments = $args;
+	$psi = new-object System.Diagnostics.ProcessStartInfo $file;
+	$psi.Arguments = $arguments;
+	$psi.Verb = "runas";
+	$psi.WorkingDirectory = get-location;
+	[System.Diagnostics.Process]::Start($psi);
 }
 
 # Определения Alias'ов
@@ -136,6 +134,7 @@ Set-Alias new New-Object
 Set-Alias cmdSever connect-sever
 Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
 Add-PSSnapin NetCmdlets
+set-alias sudo elevate-process
 
 # Подпись :-)
 
