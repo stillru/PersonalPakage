@@ -12,6 +12,8 @@ ToDo
 
 * Add to scripts module to send Jabber notifications
 * Add script to clear TS Sessions
+* Create cron-deamon wich shuld monitor shared folder, if in folder creates new folder it shuld copy that folder to another place with same name, convert it to needed format, and copy to destinstion folder.
+  Need to have only one copy of working process.
 * Simple keylogger
 
 ####################################################################
