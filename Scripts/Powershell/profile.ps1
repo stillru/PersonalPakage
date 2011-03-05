@@ -7,7 +7,7 @@
 
 $TOOLS = 'C:\Program Files\PuTTY'
 $CYDWIN = 'C:\CygWIN\bin'
-$env:EDITOR = 'npp'
+$env:EDITOR = 'nano'
 
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 
