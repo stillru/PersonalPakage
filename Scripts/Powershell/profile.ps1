@@ -1,4 +1,4 @@
-﻿# PowerShell Profile
+# PowerShell Profile
 #
 # Editor: Steve Illichevsky
 # Email:  still.ru@gmail.com
@@ -7,7 +7,7 @@
 
 $TOOLS = 'C:\Program Files\PuTTY'
 $CYDWIN = 'C:\CygWIN\bin'
-$env:EDITOR = 'nano'
+$env:EDITOR = 'npp'
 
 Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 
@@ -152,19 +152,26 @@ function elevate-process
 }
 
 # Определения Alias'ов
-function connect-sever { Enter-PSSession -ComputerName:192.168.1.220 -Credential:SEVER\still }
 Set-Alias new New-Object
 Set-Alias apad 'C:\Program Files\AkelPad\akelpad.exe'
+Set-Alias npp 'C:\Program Files\Notepad++\Notepad++.exe'
 Set-Alias sudo elevate-process
-Add-PSSnapin NetCmdlets
+function Conf-Remote {
+	param( [string]$Server , [string]$Name )
+	New-PSSession -ComputerName $Server -Credential SEVER\Still -Name $Name
+}
+Function Connect-Remote {
+	param( [string]$Name )
+	Enter-PSSession -Name $Name
+}
 
 # Подпись :-)
 
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrzIS7UaJL6vTgL9i7mpnmXiU
-# PiGgggI/MIICOzCCAaigAwIBAgIQ84Pm6xEt3IBIvyjAmjsGQzAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0TIMULYr8bszR2tGGDWyjy3N
+# u1qgggI/MIICOzCCAaigAwIBAgIQ84Pm6xEt3IBIvyjAmjsGQzAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDMxNDI0NDdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrVtuT+O+L
@@ -180,8 +187,8 @@ Add-PSSnapin NetCmdlets
 # Q2VydGlmaWNhdGUgUm9vdAIQ84Pm6xEt3IBIvyjAmjsGQzAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUwqr1FEmjIyQ3WbHFfASJ3AwzorQwDQYJKoZIhvcNAQEBBQAEgYAbO4LSiKbA
-# qK1yXc3W5jie3UyPNJkPcFaVYLA144Wno2ezGi4V6crDeeJi2nOzvNha1BdSJINZ
-# c6mAOazH6w0oTcRNGvcITbcf0aTiP8LHiO8aLjnKPbFulskdICu5MBYhtcf9w+kf
-# c+XyXbMowoYFcvojTnrOZXo6IUb5iZbYoA==
+# FgQUUb4OFP7hCw1yWhcdq9E/J1U1IOYwDQYJKoZIhvcNAQEBBQAEgYCD3UiV/G5I
+# 4MOKdoT8r3YF39aMHAxdThHsOP6N5rkpm++/fiIWBYe3pQVrNhyYslw3yxKhIpBu
+# YvC0NBDFxwwL5jUvzveX6qWVmOuT45SpN3lut6PnLs9RsgOX2HObaBZz6VFsMdvf
+# LTar1t53BayKxyJ1IjtgEWzRze1r4V5PiQ==
 # SIG # End signature block
