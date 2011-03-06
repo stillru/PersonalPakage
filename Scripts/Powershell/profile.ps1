@@ -4,6 +4,9 @@
 # Email:  still.ru@gmail.com
 #
 # (c) 2010
+New-PSDrive B -PSProvider FileSystem -Root C:\Users\Still\GIT\PersonalPakage\Scripts\Bash -Scope Global
+New-PSDrive P -PSProvider FileSystem -Root C:\Users\Still\GIT\PersonalPakage\Scripts\Powershell -Scope Global
+New-PSDrive Blog -Psprovider FileSystem -Root C:\Users\Still\GIT\stillru.github.com\ -Scope Global
 
 $TOOLS = 'C:\Program Files\PuTTY'
 $CYDWIN = 'C:\CygWIN\bin'
@@ -167,11 +170,12 @@ Function Connect-Remote {
 
 # Подпись :-)
 
+
 # SIG # Begin signature block
 # MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0TIMULYr8bszR2tGGDWyjy3N
-# u1qgggI/MIICOzCCAaigAwIBAgIQ84Pm6xEt3IBIvyjAmjsGQzAJBgUrDgMCHQUA
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUK3M9Rs0O3pMzmCrBwU2pB40g
+# RMOgggI/MIICOzCCAaigAwIBAgIQ84Pm6xEt3IBIvyjAmjsGQzAJBgUrDgMCHQUA
 # MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
 # Fw0xMTAzMDMxNDI0NDdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
 # IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrVtuT+O+L
@@ -187,8 +191,8 @@ Function Connect-Remote {
 # Q2VydGlmaWNhdGUgUm9vdAIQ84Pm6xEt3IBIvyjAmjsGQzAJBgUrDgMCGgUAoHgw
 # GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
 # NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQUUb4OFP7hCw1yWhcdq9E/J1U1IOYwDQYJKoZIhvcNAQEBBQAEgYCD3UiV/G5I
-# 4MOKdoT8r3YF39aMHAxdThHsOP6N5rkpm++/fiIWBYe3pQVrNhyYslw3yxKhIpBu
-# YvC0NBDFxwwL5jUvzveX6qWVmOuT45SpN3lut6PnLs9RsgOX2HObaBZz6VFsMdvf
-# LTar1t53BayKxyJ1IjtgEWzRze1r4V5PiQ==
+# FgQUdXm9Oq4ifpQl3hzi1i+E5NZUwDQwDQYJKoZIhvcNAQEBBQAEgYBTxdxm7Yml
+# eZ9BfXL4OVJmOx6ybbd+heo2kTMV/6pYIjbgyLrXJS98Mfs+FT64hKjI03R4tiz1
+# x/sPIyJ0650ab565TJ8IWNr9zgsV9NMd36qwFdTmZhr5SQlYxviQRVX3uVIG1eaw
+# PUHtFJkCsDQOr78e05OPAjNb9dbMVksAtg==
 # SIG # End signature block
