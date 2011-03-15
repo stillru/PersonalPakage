@@ -1,7 +1,7 @@
 # We assume that the Driver is installed via the MSI.
 #[string] $mongoDriverPath = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\MongoDB CSharpDriver 0.11").'(default)';
 #Add-Type -Path "$($mongoDriverPath)\MongoDB.Bson.dll";
-add-type -Path .\MongoDB.Driver.dll
+add-type -Path .\MongoDB.dll
 
 $mongo=new-object MongoDB.Driver.Mongo
 $mongo.connect()
