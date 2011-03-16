@@ -1,5 +1,23 @@
-## add-signature.ps1
-## Signs a file
+<#
+   .Synopsis
+    Add signiture for file.
+   .Description
+    Script for signing any file. 
+   .Example
+    Add-Sign.ps1 -file SomeScript.ps
+   .Inputs
+    [string]
+   .OutPuts
+    [string]
+   .Notes
+    NAME: Windows 7 Resource Kit
+    AUTHOR: Steve Illichevsky
+    LASTEDIT: 16/03/2011
+    KEYWORDS: Signing
+   .Link
+    Http://stillru.github.com
+#Requires -Version 2.0
+#>
 param([string] $file=$(throw "Please specify a filename."))
 $cert = @(Get-ChildItem cert:\CurrentUser\My -codesigning)[0]
 Set-AuthenticodeSignature $file $cert
