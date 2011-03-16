@@ -1,14 +1,23 @@
-#############################################################################
-#
-# Search-Help.ps1
-#
-# Search for PowerShell help documentation for a given keyword or reg-exp
-#
-# Example:
-#  Search-help hashtable
-#  Search-help "(datetime|ticks)"
-#############################################################################
-
+<#
+   .Synopsis
+    Search for PowerShell help documentation for a given keyword or reg-exp
+   .Description
+    Search for PowerShell help documentation for a given keyword or reg-exp
+   .Example
+    Search-help hashtable
+   .Inputs
+    [string]
+   .OutPuts
+    [string]
+   .Notes
+    NAME: Windows 7 Resource Kit
+    AUTHOR: Steve Illichevsky
+    LASTEDIT: 16/03/2011
+    KEYWORDS: Signing
+   .Link
+    http://stillru.github.com
+#Requires -Version 2.0
+#>
 param($pattern = $(throw "Please enter content to search for"))
 
 $helpNames = $(Get-Help * | Where-Object { $_.category -ne "Alias" })

@@ -1,3 +1,23 @@
+<#
+   .Synopsis
+    Get difference beetwin 2 files
+   .Description
+    Script for finding changes in two files.
+   .Example
+    Get-Diff.ps1  file1  file2
+   .Inputs
+    [string]
+   .OutPuts
+    [string]
+   .Notes
+    NAME: Windows 7 Resource Kit
+    AUTHOR: Rob van der Woude
+    LASTEDIT: 16/03/2011
+    KEYWORDS: Signing
+   .Link
+    http://www.robvanderwoude.com
+#Requires -Version 2.0
+#>
 param( [string]$orgfile, [string]$diffile, [string]$switch )
 
 If ( $diffile -eq "" ) {
