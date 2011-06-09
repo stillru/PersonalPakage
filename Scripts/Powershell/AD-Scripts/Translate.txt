@@ -1,0 +1,8 @@
+$y = import-csv .\Documents\startrek.csv
+$y |% {$_.Character = $_.Character.replace("?","A"); $_.Character = $_.Character.replace("?","v")}
+
+{$_.Character = $_.Character.replace("?","A"); $_.Character = $_.Character.replace("?","a");
+$_.Character = $_.Character.replace("?","B"); $_.Character = $_.Character.replace("?","b");
+$_.Character = $_.Character.replace("?","C"); $_.Character = $_.Character.replace("?","c");
+$_.Character = $_.Character.replace("?","D"); $_.Character = $_.Character.replace("?","d");
+$_.Character = $_.Character.replace("?","E"); $_.Character = $_.Character.replace("?","e")

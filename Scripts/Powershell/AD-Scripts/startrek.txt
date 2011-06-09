@@ -1,0 +1,2 @@
+Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
+�������, System Administrator, system, IT Department, Human, Moscow Office, test, test, Moscow Office, Сибирский проезд 2к9
