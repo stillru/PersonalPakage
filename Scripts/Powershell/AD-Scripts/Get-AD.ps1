@@ -33,7 +33,7 @@ PARAMETERS:
 -ToCsv             Saves the Output to a Csv File (Optional)
 -ToObject          Returns a System.DirectoryServices.DirectoryEntry Object (optional)
 -IncreasePageSize  Exceeds the default limit of 1000 Objects (optional)
--help              Prints the HelpFile (Optional)
+-help              Выводит Help по данному скрипту
 
 SYNTAX:
 
@@ -282,7 +282,7 @@ If you want a specific User in the Object you can get get it through Where-Objec
 
 ./Get-AD.ps1 -help
 
-Displays the help topic for the script
+Выводит Help по данному скрипту
 
 -------------------------------------------------------------------------------------------------------
 

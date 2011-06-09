@@ -22,8 +22,8 @@ Adds Groups Based on the Star Trek Csv File.
 PARAMETERS: 
 
 -Domain      Name of the DOmain (Required)
--Csv         The Csv file Used by the script (Required)
--help        Prints the HelpFile (Optional)
+-Csv         Файл в формате CSV (Обязателен)
+-help        Выводит Help по данному скрипту
 
 SYNTAX:
 
@@ -33,11 +33,11 @@ Adds Groups based on the Star Trek Csv file.
 
 Add-STGroup.ps1 -help
 
-Displays the help topic for the script
+Выводит Help по данному скрипту
 
 Additional Information:
 
-The Csv File is built up in the following way:
+CSV файл содержит следующие поля:
 
 Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
 Jean-Luc Picard, Commanding Officer, Captain, Main Bridge,  Human, USS Enterprise (NCC-1701-D), Galaxy, NCC-1701-d, Star Trek: The Next Generation, Alpha Quadrant
@@ -64,7 +64,7 @@ function Add-Group([string]$Domain, [string]$Position, [string]$Series) {
 
 	if ($distinguishedNameDoesntExist -eq $True) {
 
-		# Set Up Connection
+		# Настройка подключения
 
 		$Connection = "LDAP://OU=Groups" + $Series.Insert(0,",OU=") + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
 

@@ -22,8 +22,8 @@ Adds Users from the StarTrek Csv File
 PARAMETERS: 
 
 -Domain      Name of the DOmain (Required)
--Csv         The Csv file Used by the script (Required)
--help        Prints the HelpFile (Optional)
+-Csv         Файл в формате CSV (Обязателен)
+-help        Выводит Help по данному скрипту
 
 SYNTAX:
 
@@ -33,11 +33,11 @@ Adds the Users from the Csv file to Active-Directory.
 
 Add-STUser.ps1 -help
 
-Displays the help topic for the script
+Выводит Help по данному скрипту
 
 Additional Information:
 
-The Csv File is built up in the following way:
+CSV файл содержит следующие поля:
 
 Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
 Jean-Luc Picard, Commanding Officer, Captain, Main Bridge,  Human, USS Enterprise (NCC-1701-D), Galaxy, NCC-1701-d, Star Trek: The Next Generation, Alpha Quadrant

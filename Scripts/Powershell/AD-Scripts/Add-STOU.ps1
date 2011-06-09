@@ -17,13 +17,13 @@ $HelpText = @"
 DESCRIPTION:
 
 NAME: Add-STOU.ps1
-Adds OU Structure based on the Star Trek Csv File.
+Добавляет OU Структуру основанную на CSV файле
 
 PARAMETERS: 
 
--Domain      Name of the DOmain (Required)
--Csv         The Csv file Used by the script (Required)
--help        Prints the HelpFile (Optional)
+-Domain      Имя домена (обязателен)
+-Csv         Файл в формате CSV (Обязателен)
+-help        Выводит Help по данному скрипту
 
 SYNTAX:
 
@@ -33,11 +33,11 @@ Adds OU Structure based on the Star Trek Csv File.
 
 Add-STOU.ps1 -help
 
-Displays the help topic for the script
+Выводит Help по данному скрипту
 
 Additional Information:
 
-The Csv File is built up in the following way:
+CSV файл содержит следующие поля:
 
 Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
 Jean-Luc Picard, Commanding Officer, Captain, Main Bridge,  Human, USS Enterprise (NCC-1701-D), Galaxy, NCC-1701-d, Star Trek: The Next Generation, Alpha Quadrant
@@ -58,15 +58,14 @@ function Get-Csv ([string]$Domain, [string]$Csv) {
 
 function Add-OU ([string]$Domain, [string]$Series, [string]$Starship, [string]$Location) {
 
-	# Check if OU Exists
-
+	# Проверка на существование UO
 	$distinguishedName = "OU=" + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
 
 	Check-distinguishedName -Domain $Domain -OU $distinguishedName
 
 	if ($distinguishedNameDoesntExist -eq $True) {
 
-		# Set Up Connection
+		# Настройка подключения
 
 		$Connection = ($Domain.Replace(".",",DC=")).Insert(0,"LDAP://DC=")
 
@@ -96,6 +95,20 @@ function Add-OU ([string]$Domain, [string]$Series, [string]$Starship, [string]$L
 		$Users.setinfo()
 
 		Write-Host "Added OU: Users to $Series" -ForegroundColor Green
+
+		$NewConnection = "LDAP://OU=Users,OU=" + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
+		$NewOU = [adsi]$NewConnection
+
+		$Users = $NewOU.Create("OrganizationalUnit", "ou=" + $Department)
+		$Users.SetInfo()
+
+		$Users.put("l", $Location)
+		$Users.put("Description", $Department)
+		$Users.setinfo()
+		
+		
+		Write-Host "Added OU: $Department to Users" -ForegroundColor Green
+
 
 		# Add Groups OU
 
