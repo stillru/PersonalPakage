@@ -2,7 +2,7 @@
 x=`tr -cd [:alnum:] < /dev/urandom | head -c8`
 if [ $1 = ""]; then
 	echo "Need some information about Pepole"
-elif [ $2 ="" ]; then
+elif [ $2 = "" ]; then
 	echo "Need token Serial Number"
 else
 gpg password.txt.gpg
