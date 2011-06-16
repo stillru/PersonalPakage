@@ -52,8 +52,8 @@ function Get-Csv ([string]$Domain, [string]$Csv) {
 
 	$CsvFile | Select Series, Starship, Location , Department -unique | ForEach {
 
-		Add-OU -Domain $Domain -Series $_.Series -Starship $_.Starship -Location $_.Location -Department $_.Department
-		Add-OU2 -Domain $Domain -Series -Department $_.Department
+		Add-OU -Domain $Domain -Series $_.Series -Starship $_.Starship -Location $_.Location
+		Add-OU2 -Domain $Domain -Series $_.Series -Department $_.Department -Location $_.Location
 	}
 }
 
@@ -61,7 +61,7 @@ function Add-OU ([string]$Domain, [string]$Series, [string]$Starship, [string]$L
 
 	# Check if OU Exists
 
-	$distinguishedName = "OU="+ $Department + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
+	$distinguishedName = "OU="+ $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
 
 	Check-distinguishedName -Domain $Domain -OU $distinguishedName
 
@@ -137,6 +137,12 @@ function Add-OU ([string]$Domain, [string]$Series, [string]$Starship, [string]$L
 }
 
 function Add-OU2 ([string]$Domain, [string]$Series, [string]$Location, [string]$Department) {
+		$distinguishedName = "OU="+ $Department + ",OU=Users,OU="+ $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
+
+		Check-distinguishedName -Domain $Domain -OU $distinguishedName
+
+	if ($distinguishedNameDoesntExist -eq $True){
+		
 		# Another connection
 		$NewConnection2 = "LDAP://OU=Users,OU=" + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
 		$NewOU2 = [adsi]$NewConnection2
@@ -146,11 +152,18 @@ function Add-OU2 ([string]$Domain, [string]$Series, [string]$Location, [string]$
 		$Dep.put("l", $Location)
 		$Dep.put("Description", $Department)
 		$Dep.setinfo()
-		}
+		
 
 
 		Write-Host "Added OU: $Department to Users in $Series" -ForegroundColor Green
+} else {
 
+		Write-Host "OU: $Department in Users at $Series Already Exists" -ForegroundColor Yellow
+	}
+
+	# Clear Variables
+
+	$Script:distinguishedNameDoesntExist = $False
 }
 function Check-distinguishedName ([string]$Domain, [string]$OU) {
 
