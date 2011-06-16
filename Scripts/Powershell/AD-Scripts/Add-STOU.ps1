@@ -53,6 +53,7 @@ function Get-Csv ([string]$Domain, [string]$Csv) {
 	$CsvFile | Select Series, Starship, Location , Department -unique | ForEach {
 
 		Add-OU -Domain $Domain -Series $_.Series -Starship $_.Starship -Location $_.Location -Department $_.Department
+		Add-OU2 -Domain $Domain -Series -Department $_.Department
 	}
 }
 
@@ -122,22 +123,6 @@ function Add-OU ([string]$Domain, [string]$Series, [string]$Starship, [string]$L
 		Write-Host "Added OU: Computers to $Series" -ForegroundColor Green
 
 		
-		# Another connection
-		$NewConnection2 = "LDAP://OU=Users,OU=" + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
-		$NewOU2 = [adsi]$NewConnection2
-		$CsvFile2 = Import-Csv $Csv
-		$CsvFile2 | Select Department -unique | ForEach {
-		$Dep = $NewOU2.Create("OrganizationalUnit", "ou=$Department")
-		$Dep.SetInfo()
-
-		$Dep.put("l", $Location)
-		$Dep.put("Description", $Department)
-		$Dep.setinfo()
-		}
-
-
-		Write-Host "Added OU: $Department to Users in $Series" -ForegroundColor Green
-
 		
 		
 
@@ -151,6 +136,22 @@ function Add-OU ([string]$Domain, [string]$Series, [string]$Starship, [string]$L
 	$Script:distinguishedNameDoesntExist = $False
 }
 
+function Add-OU2 ([string]$Domain, [string]$Series, [string]$Location, [string]$Department) {
+		# Another connection
+		$NewConnection2 = "LDAP://OU=Users,OU=" + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
+		$NewOU2 = [adsi]$NewConnection2
+		$Dep = $NewOU2.Create("OrganizationalUnit", "ou=$Department")
+		$Dep.SetInfo()
+
+		$Dep.put("l", $Location)
+		$Dep.put("Description", $Department)
+		$Dep.setinfo()
+		}
+
+
+		Write-Host "Added OU: $Department to Users in $Series" -ForegroundColor Green
+
+}
 function Check-distinguishedName ([string]$Domain, [string]$OU) {
 
 	trap {  $Script:distinguishedNameDoesntExist = $True ; continue } .\Get-AD.ps1 -Domain $Domain -OU $OU -Filter distinguishedName | Out-Null
