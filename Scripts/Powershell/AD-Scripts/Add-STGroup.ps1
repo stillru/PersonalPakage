@@ -22,8 +22,8 @@ Adds Groups Based on the Star Trek Csv File.
 PARAMETERS: 
 
 -Domain      Name of the DOmain (Required)
--Csv         Файл в формате CSV (Обязателен)
--help        Выводит Help по данному скрипту
+-Csv         The Csv file Used by the script (Required)
+-help        Prints the HelpFile (Optional)
 
 SYNTAX:
 
@@ -33,11 +33,11 @@ Adds Groups based on the Star Trek Csv file.
 
 Add-STGroup.ps1 -help
 
-Выводит Help по данному скрипту
+Displays the help topic for the script
 
 Additional Information:
 
-CSV файл содержит следующие поля:
+The Csv File is built up in the following way:
 
 Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
 Jean-Luc Picard, Commanding Officer, Captain, Main Bridge,  Human, USS Enterprise (NCC-1701-D), Galaxy, NCC-1701-d, Star Trek: The Next Generation, Alpha Quadrant
@@ -64,7 +64,7 @@ function Add-Group([string]$Domain, [string]$Position, [string]$Series) {
 
 	if ($distinguishedNameDoesntExist -eq $True) {
 
-		# Настройка подключения
+		# Set Up Connection
 
 		$Connection = "LDAP://OU=Groups" + $Series.Insert(0,",OU=") + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
 
@@ -141,29 +141,3 @@ if ($help) {
 } else {
 	GetHelp
 }
-
-# SIG # Begin signature block
-# MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
-# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6f6GVEMSHIpNM7UFNguqGMXa
-# L4ugggI/MIICOzCCAaigAwIBAgIQEoPtL4boPrtC3SU2buCv8jAJBgUrDgMCHQUA
-# MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
-# Fw0xMTA0MTcxMDE3MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
-# IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDNS0UlibCi
-# ee8p01vzbsGDrOwycGKHoTTPu4WW2cO5kiZMc9ssT2no5uihGO5/QZi9uLtIFtyk
-# AvPj4+WSjOCcvWkh6GRXg3EKxeP31HVyx1tT4p0/hpkQGYbOyHnSr5Rhl/ZsFZqr
-# czu3VQWFdNw25+DqFCxAbF4CKXN8oIhFsQIDAQABo3YwdDATBgNVHSUEDDAKBggr
-# BgEFBQcDAzBdBgNVHQEEVjBUgBDs9tfN4CVX/di6ZfySo+h4oS4wLDEqMCgGA1UE
-# AxMhUG93ZXJTaGVsbCBMb2NhbCBDZXJ0aWZpY2F0ZSBSb290ghDRk8Je+PxYtkub
-# 5OGUg9ziMAkGBSsOAwIdBQADgYEAud9iRB9g/CmubZ5U+lBkpPTyIzuSgoygo35X
-# ORewz73XwRMaC7ygSwZTFuBJboVTNUlOZVIDgk4+06JkomqIOeZOkEgYb+Un9Jat
-# 1lBlXHAyrYLX/6w9llMFy0zAKQ+iWhdR45/L5mjy3F0qke16tr4Ar7gkQJmy8KCM
-# mSL7/eQxggFgMIIBXAIBATBAMCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwg
-# Q2VydGlmaWNhdGUgUm9vdAIQEoPtL4boPrtC3SU2buCv8jAJBgUrDgMCGgUAoHgw
-# GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
-# NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQU0yAQikSQyKRGqseEd3jDOKF84mwwDQYJKoZIhvcNAQEBBQAEgYBhtPB5dSeN
-# EjHuHUJR3l9Vpa92/80O5n1rHhAnF69dfubzN4I/6d0GYxC2ayfuugI7O/wSswbR
-# ygi+ijbrCQGlOrRQlN1AUItz42ocmOPc0OMJe4dh2SbG2tvMEWmHyBhx6DoUEHqg
-# zP7hTCbNOKN5SUcu3MWqCMJmFK8+kKCTFw==
-# SIG # End signature block

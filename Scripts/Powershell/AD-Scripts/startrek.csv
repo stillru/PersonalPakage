@@ -1,2 +1,61 @@
-﻿Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
-Авличев, System Administrator, system, IT Department, Human, Moscow Office, test, test, Moscow Office, РЎРёР±РёСЂСЃРєРёР№ РїСЂРѕРµР·Рґ 2Рє9
+﻿Character, Position, Rank, Department, Species, Starship, Series, Location
+Макеева Татьяна,Finance,Финансовый Директор,Finance,Финансовый Директор,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Галетка О.И.,Finance,Главный Бухгалтер,Finance,Главный Бухгалтер,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Ким Валерия,Finance,Бухгалтер,Finance,Бухгалтер,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Копцева А.М.,Finance,Бухгалтер,Finance,Бухгалтер,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Михайлова Людмила,Finance,Бухгалтер,Finance,Бухгалтер,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Селиверстова О.,Finance,Бухгалтер,Finance,Бухгалтер,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Бакотин Павел,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Большаков Сергей,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Далимова Регина,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Дегтярев Владислав,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Ким Сергей,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Крылов Алексей,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Маргулец Андрей,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Першаков Денис,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Шебанов Сергей,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Золотайкин Вячеслав,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Арнаутов Андрей,IT Department,Специалист 1с,IT Department,Специалист 1с,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Щедрин Александр,IT Department,Web-разработчик,IT Department,Web-разработчик,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Круглов Виктор,IT Department,Специалист 1с,IT Department,Специалист 1с,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Панченко Олег,IT Department,Системный Администратор,IT Department,Системный Администратор,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Илличевский Степан,IT Department,Системный Администратор,IT Department,Системный Администратор,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Кондрашова Ольга,Logistic,Логист,Logistic,Логист,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Бурова Ирина,Sales,Менеджер по продажам,Sales,Менеджер по продажам,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Майорова Маргарита,Sales,Директор по продажам,Sales,Директор по продажам,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Силина Елена,Sales,Менеджер по продажам,Sales,Менеджер по продажам,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Зубкова Наталья,Sales,Менеджер по продажам,Sales,Менеджер по продажам,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Алексеева Ксения,Secretary,Секретарь,Secretary,Секретарь,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Лукина Виктория,Secretary,Секретарь,Secretary,Секретарь,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Галаган А.О.,Service & Reclamation,Менеджер Сервисного отдела,Service & Reclamation,Менеджер Сервисного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Жучков Иван,Service & Reclamation,Работник Сервисного отдела,Service & Reclamation,Работник Сервисного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Рамунас Антон,Service & Reclamation,Начальник Сервисного отдела,Service & Reclamation,Начальник Сервисного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Щербакова Наталья,Service & Reclamation,Начальник отдела Рекламации,Service & Reclamation,Начальник отдела Рекламации,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Андреев Сергей,Service & Reclamation,Менеджер Сервисного отдела,Service & Reclamation,Менеджер Сервисного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Крохина Анастасия,Service & Reclamation,Сотрудник отдела Рекламации,Service & Reclamation,Сотрудник отдела Рекламации,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Сиротина Виктория,Supervisor,Директор по развитию,Supervisor,Директор по развитию,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Авличев Андрей,Supervisor,Супервизор ИП,Supervisor,Супервизор ИП,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Жданов И.А.,Transporting,Оператор транспортного отдела,Transporting,Оператор транспортного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Бачурихина Т.Н.,Transporting,Оператор транспортного отдела,Transporting,Оператор транспортного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Сиротин Влад,Transporting,Начальник транспортного отдела,Transporting,Начальник транспортного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Широков Алексей,Transporting,Зам. начальника транспортного отдела,Transporting,Зам. начальника транспортного отдела,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Коновал Е.Ю.,Warehouse,Оператор склада,Warehouse,Оператор склада,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Меркулов А. С.,Warehouse,Оператор склада,Warehouse,Оператор склада,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Мысин Р.А.,Warehouse,Начальник склада,Warehouse,Начальник склада,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Сидоров В.Э.,Warehouse,Оператор склада,Warehouse,Оператор склада,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Вергелес Оксана,Warehouse,Зам. начальника склада,Warehouse,Зам. начальника склада,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Захаров Станислав Васильевич,Buyers,Менеджер отдела закупки,Buyers,Менеджер отдела закупки,Mega-Lex Ekatirenburg,Mega-Lex Ekatirenburg,Somewhere
+Дмитрий Бреев,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Vladimir,Mega-Lex Vladimir,Somewhere
+Булавинов Александр,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Vladimir,Mega-Lex Vladimir,Somewhere
+Крупников Ф. К.,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Vladimir,Mega-Lex Vladimir,Somewhere
+Мелешкевич А. В.,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Vladimir,Mega-Lex Vladimir,Somewhere
+Семенченко Ирина,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Vladimir,Mega-Lex Vladimir,Somewhere
+Войтенко Ирина,Inet Sales,Продавец ИП,Inet Sales,Продавец ИП,Mega-Lex Vladimir,Mega-Lex Vladimir,Somewhere
+Грошева Дарья Владимировна,Sales,Продавец ИП,Sales,Продавец ИП,Mega-Lex Ekatirenburg,Mega-Lex Ekatirenburg,Somewhere
+Грядасов Антон,Buyers,Менеджер Отдела закупок,Buyers,Менеджер Отдела закупок,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Ольхов Алексей,Directors,Соучередитель,Directors,Соучередитель,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Михайлов Евгений,Directors,Генеральный директор,Directors,Генеральный директор,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Макарова Елизавета,Buyers,Менеджер Отдела закупок,Buyers,Менеджер Отдела закупок,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Лобанова Елена,Buyers,Менеджер Отдела закупок,Buyers,Менеджер Отдела закупок,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Ланин Андрей,Buyers,Менеджер Отдела закупок,Buyers,Менеджер Отдела закупок,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9
+Ассанова Наталья,Buyers,Менеджер Отдела закупок,Buyers,Менеджер Отдела закупок,Mega-Lex Moscow,Mega-Lex Moscow,Москва Сибирский Проезд д2к9

@@ -1,4 +1,4 @@
-##################################################################################
+﻿##################################################################################
 #
 #
 #  Script name: Add-STUser.ps1
@@ -22,8 +22,8 @@ Adds Users from the StarTrek Csv File
 PARAMETERS: 
 
 -Domain      Name of the DOmain (Required)
--Csv         Файл в формате CSV (Обязателен)
--help        Выводит Help по данному скрипту
+-Csv         The Csv file Used by the script (Required)
+-help        Prints the HelpFile (Optional)
 
 SYNTAX:
 
@@ -33,17 +33,109 @@ Adds the Users from the Csv file to Active-Directory.
 
 Add-STUser.ps1 -help
 
-Выводит Help по данному скрипту
+Displays the help topic for the script
 
 Additional Information:
 
-CSV файл содержит следующие поля:
+The Csv File is built up in the following way:
 
 Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
 Jean-Luc Picard, Commanding Officer, Captain, Main Bridge,  Human, USS Enterprise (NCC-1701-D), Galaxy, NCC-1701-d, Star Trek: The Next Generation, Alpha Quadrant
 
 "@
 $HelpText
+}
+
+function global:TranslitToLAT
+{
+            param([string]$inString)
+			
+	$Translit_To_LAT = @{ 
+	[char]'а' = "a"
+	[char]'А' = "A"
+	[char]'б' = "b"
+	[char]'Б' = "B"
+	[char]'в' = "v"
+	[char]'В' = "V"
+	[char]'г' = "g"
+	[char]'Г' = "G"
+	[char]'д' = "d"
+	[char]'Д' = "D"
+	[char]'е' = "e"
+	[char]'Е' = "E"
+	[char]'ё' = "yo"
+	[char]'Ё' = "Yo"
+	[char]'ж' = "zh"
+	[char]'Ж' = "Zh"
+	[char]'з' = "z"
+	[char]'З' = "Z"
+	[char]'и' = "i"
+	[char]'И' = "I"
+	[char]'й' = "j"
+	[char]'Й' = "J"
+	[char]'к' = "k"
+	[char]'К' = "K"
+	[char]'л' = "l"
+	[char]'Л' = "L"
+	[char]'м' = "m"
+	[char]'М' = "M"
+	[char]'н' = "n"
+	[char]'Н' = "N"
+	[char]'о' = "o"
+	[char]'О' = "O"
+	[char]'п' = "p"
+	[char]'П' = "P"
+	[char]'р' = "r"
+	[char]'Р' = "R"
+	[char]'с' = "s"
+	[char]'С' = "S"
+	[char]'т' = "t"
+	[char]'Т' = "T"
+	[char]'у' = "u"
+	[char]'У' = "U"
+	[char]'ф' = "f"
+	[char]'Ф' = "F"
+	[char]'х' = "x"
+	[char]'Х' = "X"
+	[char]'ц' = "c"
+	[char]'Ц' = "C"
+	[char]'ч' = "ch"
+	[char]'Ч' = "Ch"
+	[char]'ш' = "sh"
+	[char]'Ш' = "Sh"
+	[char]'щ' = "shh"
+	[char]'Щ' = "Shh"
+	[char]'ъ' = ""		# "``"
+	[char]'Ъ' = ""		# "``"
+	[char]'ы' = "y"		# "y`"
+	[char]'Ы' = "Y"		# "Y`"
+	[char]'ь' = ""		# "`"
+	[char]'Ь' = ""		# "`"
+	[char]'э' = "e"		# "e`"
+	[char]'Э' = "E"		# "E`"
+	[char]'ю' = "yu"
+	[char]'Ю' = "Yu"
+	[char]'я' = "ya"
+	[char]'Я' = "Ya"
+	}
+
+	$outChars=""
+	
+	foreach ($c in $inChars = $inString.ToCharArray())
+	{
+		if ($Translit_To_LAT[$c] -cne $Null ) 
+		{
+			$outChars += $Translit_To_LAT[$c]
+		}
+		else
+		{
+			$outChars += $c
+		}
+	
+	}
+	
+	Write-Output $outChars
+ 
 }
 
 function Get-Csv ([string]$Domain, [string]$Csv) {
@@ -61,7 +153,7 @@ function Add-User ([string]$Domain, [string]$Character, [string]$Position, [stri
 
 	# Set up AD Connectionstring
 
-	$Connection = $Series.Insert(0,"LDAP://OU=Users,OU=") + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
+	$Connection = $Series.Insert(0,"LDAP://OU=" + $Department +",OU=Users,OU=") + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
 
 	# Check Character Name
 
@@ -132,7 +224,7 @@ function Add-User ([string]$Domain, [string]$Character, [string]$Position, [stri
 
 		} else {
 
-			[string]$sAMAccountName = ($givenName.SubString(0,3)).ToLower() + ($sn.SubString(0,3)).ToLower()
+			[string]$sAMAccountName = ($givenName).ToLower() + "." + ($sn.SubString(0,1)).ToLower()
 			$cn = $givenName + " " + $sn
 
 		}
@@ -166,19 +258,23 @@ function Add-User ([string]$Domain, [string]$Character, [string]$Position, [stri
 
 	# Check if User Already Exists
 
-	$distinguishedName = "CN=" + $cn + ",OU=Users,OU=" + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
+	$distinguishedName = "CN=" + $cn + ",OU=" + $Department + ",OU=Users,OU=" + $Series + ($Domain.Replace(".",",DC=")).Insert(0,",DC=")
 
 	Check-distinguishedName -Domain $Domain -User $distinguishedName
 
 	if ($distinguishedNameDoesntExist -eq $True) {
 
 		# Set Up Variables
-
+		$enCharacter=TranslitToLAT($Character)
+		$ensAMAccountName=TranslitToLAT($sAMAccountName)
+		$LastChar = $sAMAccountName.SubString($sAMAccountName.Length -1)
+		$engivenName=TranslitToLAT($givenName)
+		$ensn=TranslitToLAT($sn)
 		$Description = $Position + " (" + $Species + ")"
 		$Title = $Rank
 		$physicalDeliveryOfficeName = $Starship
-		$userPrincipalName = $sAMAccountName + "@" + $Domain
-		[string]$mail = ([string]$Character).Replace(" ",".") + "@" + $Domain
+		$userPrincipalName = $sAMAccountName + "@OFFICE"
+		[string]$mail = ([string]$engivenName) + "." + ([string]$LastChar) + "@mega-lex.ru"
 
 		# Get A Unique Password
 
@@ -186,10 +282,12 @@ function Add-User ([string]$Domain, [string]$Character, [string]$Position, [stri
 		
 		# Create User in AD
 
+		$userPrincipalName2=TranslitToLAT($userPrincipalName)
+		
 		$OU = [adsi] $Connection
 		$User = $OU.Create("user", "cn=$cn")
-		$User.Put("sAMAccountName", $sAMAccountName)
-		$User.Put("userPrincipalName", $userPrincipalName)
+		$User.Put("sAMAccountName", $ensAMAccountName)
+		$User.Put("userPrincipalName", $userPrincipalName2)
 		$User.Put("DisplayName", $cn)
 		$User.Put("givenName", $givenName)
 		$User.Put("sn", $sn)
@@ -213,7 +311,7 @@ function Add-User ([string]$Domain, [string]$Character, [string]$Position, [stri
 
 		$FileName = "PasswordList " + (get-date -uformat "%Y-%m-%d") + ".txt"
 
-		"$sAMAccountName,$cn,$Password" | Add-Content $FileName
+		"$enCharacter,$userPrincipalName2,$Password" | Add-Content $FileName
 
 		Write-Host "Added User: $Character" -ForegroundColor Green
 
@@ -277,29 +375,3 @@ if ($help) {
 } else {
 	GetHelp
 }
-
-# SIG # Begin signature block
-# MIIENQYJKoZIhvcNAQcCoIIEJjCCBCICAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
-# gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU14KBUby+acyZgON4B7EPqXj2
-# XH6gggI/MIICOzCCAaigAwIBAgIQEoPtL4boPrtC3SU2buCv8jAJBgUrDgMCHQUA
-# MCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwgQ2VydGlmaWNhdGUgUm9vdDAe
-# Fw0xMTA0MTcxMDE3MTdaFw0zOTEyMzEyMzU5NTlaMBwxGjAYBgNVBAMTEVN0ZXZl
-# IElsbGljaGV2c2t5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDNS0UlibCi
-# ee8p01vzbsGDrOwycGKHoTTPu4WW2cO5kiZMc9ssT2no5uihGO5/QZi9uLtIFtyk
-# AvPj4+WSjOCcvWkh6GRXg3EKxeP31HVyx1tT4p0/hpkQGYbOyHnSr5Rhl/ZsFZqr
-# czu3VQWFdNw25+DqFCxAbF4CKXN8oIhFsQIDAQABo3YwdDATBgNVHSUEDDAKBggr
-# BgEFBQcDAzBdBgNVHQEEVjBUgBDs9tfN4CVX/di6ZfySo+h4oS4wLDEqMCgGA1UE
-# AxMhUG93ZXJTaGVsbCBMb2NhbCBDZXJ0aWZpY2F0ZSBSb290ghDRk8Je+PxYtkub
-# 5OGUg9ziMAkGBSsOAwIdBQADgYEAud9iRB9g/CmubZ5U+lBkpPTyIzuSgoygo35X
-# ORewz73XwRMaC7ygSwZTFuBJboVTNUlOZVIDgk4+06JkomqIOeZOkEgYb+Un9Jat
-# 1lBlXHAyrYLX/6w9llMFy0zAKQ+iWhdR45/L5mjy3F0qke16tr4Ar7gkQJmy8KCM
-# mSL7/eQxggFgMIIBXAIBATBAMCwxKjAoBgNVBAMTIVBvd2VyU2hlbGwgTG9jYWwg
-# Q2VydGlmaWNhdGUgUm9vdAIQEoPtL4boPrtC3SU2buCv8jAJBgUrDgMCGgUAoHgw
-# GAYKKwYBBAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGC
-# NwIBBDAcBgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQx
-# FgQU8nNlspw/rHOOSVxYXeent7HQNsIwDQYJKoZIhvcNAQEBBQAEgYA/o6X4k9oc
-# BYUKOY4mJVlMo6SbbESvPS+D8cGXuoHQ5avNZomEK6ikJf9RXri+fQ+ow4QWAd+8
-# Ta5bl1Wd2zidf8GdUgSmkrEMu4AGIq73nB0//HtNZekYAKuluCotyfKremBreKV1
-# nNFADrMpxNnLKMlMCUBlrCc42qM9lsjNsw==
-# SIG # End signature block
