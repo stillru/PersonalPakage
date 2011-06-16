@@ -41,7 +41,7 @@ param(
 $SMTPServer = "smtp.gmail.com" 
 $SMTPClient = New-Object Net.Mail.SMTPClient( $SmtpServer, 587 )  
 $SMTPClient.EnableSSL = $true 
-$SMTPClient.Credentials = New-Object System.Net.NetworkCredential( "still.ru", "weare1234" ); 
+$SMTPClient.Credentials = New-Object System.Net.NetworkCredential( "", "" ); 
 
 # From Core @ StackOverflow.com
 $emailMessage = New-Object System.Net.Mail.MailMessage
