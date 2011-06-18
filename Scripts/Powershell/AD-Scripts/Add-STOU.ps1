@@ -14,30 +14,30 @@ function GetHelp() {
 
 $HelpText = @"
 
-DESCRIPTION:
+ОПИСАНИЕ:
 
-NAME: Add-STOU.ps1
+ИМЯ: Add-STOU.ps1
 Adds OU Structure based on the Star Trek Csv File.
 
-PARAMETERS: 
+ПАРАМЕТРЫ: 
 
--Domain      Name of the DOmain (Required)
--Csv         The Csv file Used by the script (Required)
--help        Prints the HelpFile (Optional)
+-Domain      Имя домена (Обязательно)
+-Csv         Файл в формате CVS который используется скриптом (Обязательно)
+-help        Вывод справки (Опционально)
 
-SYNTAX:
+СИНТАКСИС:
 
 Add-STOU.ps1 -Domain powershell.nu -Csv C:\MyFolder\StarTrek.csv
 
-Adds OU Structure based on the Star Trek Csv File.
+Добавляет в заданный домен структуру из файла.
 
 Add-STOU.ps1 -help
 
-Displays the help topic for the script
+Показывает справку по этому скрипту (этот текст)
 
-Additional Information:
+Дополнительная информация:
 
-The Csv File is built up in the following way:
+CSV-файл построен следующим образом.
 
 Character, Position, Rank, Department, Species, Starship, Class, Registry, Series, Location
 Jean-Luc Picard, Commanding Officer, Captain, Main Bridge,  Human, USS Enterprise (NCC-1701-D), Galaxy, NCC-1701-d, Star Trek: The Next Generation, Alpha Quadrant

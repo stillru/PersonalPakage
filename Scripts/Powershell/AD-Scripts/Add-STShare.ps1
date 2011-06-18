@@ -14,26 +14,26 @@ function GetHelp() {
 
 $HelpText = @"
 
-DESCRIPTION:
+ОПИСАНИЕ:
 
-NAME: Add-STShare.ps1
+ИМЯ: Add-STShare.ps1
 Creates a Share on the Server.
 
-PARAMETERS: 
+ПАРАМЕТРЫ: 
 
--Share           Path To Share (Required)
--ShareName       Name of Share (Required)
--help            Prints the HelpFile (Optional)
+-Share           Путь до расшаренной папки (Обязательно)
+-ShareName       Имя расшаренной папки (Обязательно)
+-help            Вывод справки (Опционально)
 
-SYNTAX:
+СИНТАКСИС:
 
 Add-STShare.ps1 -Share C:\Share -ShareName "StarTrek User Share"
 
-Creates a Share 
+Создаёт расшаренную папку. 
 
 Add-STShare.ps1 -help
 
-Displays the help topic for the script
+Показывает справку по этому скрипту (этот текст)
 
 "@
 $HelpText

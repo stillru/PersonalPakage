@@ -15,33 +15,33 @@ function GetHelp() {
 
 $HelpText = @"
 
-DESCRIPTION
+ОПИСАНИЕ
 
-NAME: Get-AD.ps1
+ИМЯ: Get-AD.ps1
 Gets Information About Objects in Active-Directory
 
-PARAMETERS:
--Domain            Name of the Domain (Required)
--OU                Name of Organizational Unit (Optional)
--User              Name of the User (Optional)
--Group             Name of the Group (Optional)
--Computer          Name of the Computer (Optional)
--Filter            Filter on Specified Criteria, default is name (optional)
--CustomFilter      Create A custom SearchFilter That Searches for One Object (optional)
--CustomAll         Create A Custom SerachFilter That Searches For One OR more Objects (optional)
--Property          Specify one or more Properties to Return, default set to All Properties (Optional)
--ToCsv             Saves the Output to a Csv File (Optional)
--ToObject          Returns a System.DirectoryServices.DirectoryEntry Object (optional)
--IncreasePageSize  Exceeds the default limit of 1000 Objects (optional)
--help              Prints the HelpFile (Optional)
+ПАРАМЕТРЫ:
+-Domain            Имя домена (Обязательно)
+-OU                Имя организационной единицы (Опционально)
+-User              Name of the User (Опционально)
+-Group             Name of the Group (Опционально)
+-Computer          Name of the Computer (Опционально)
+-Filter            Filter on Specified Criteria, default is name (Опционально)
+-CustomFilter      Create A custom SearchFilter That Searches for One Object (Опционально)
+-CustomAll         Create A Custom SerachFilter That Searches For One OR more Objects (Опционально)
+-Property          Specify one or more Properties to Return, default set to All Properties (Опционально)
+-ToCsv             Saves the Output to a Csv File (Опционально)
+-ToObject          Returns a System.DirectoryServices.DirectoryEntry Object (Опционально)
+-IncreasePageSize  Exceeds the default limit of 1000 Objects (Опционально)
+-help              Вывод справки (Опционально)
 
-SYNTAX:
+СИНТАКСИС:
 
 
 -Domain Parameter
 -------------------------------------------------------------------------------------------------------
 
-The Domain Parameter is the Only parameter that is Required in the Script.
+The Domain Parameter is the Only parameter that is ((Обязательно)) in the Script.
 Specify Which Domain You want to Connect to.
 
 Below are Examples Using the Domain Parameter:
@@ -282,7 +282,7 @@ If you want a specific User in the Object you can get get it through Where-Objec
 
 ./Get-AD.ps1 -help
 
-Displays the help topic for the script
+Показывает справку по этому скрипту (этот текст)
 
 -------------------------------------------------------------------------------------------------------
 
@@ -320,7 +320,7 @@ function Get-AD ([string]$Domain, [string]$OU, [string]$User, [string]$Group, [s
 		if ($OU) {
 			$SearchFilter = '(objectClass=OrganizationalUnit)'
 		} elseif ($User) {
-			$SearchFilter = '(&(objectClass=person)(!(objectClass=Computer)))'
+			$SearchFilter = '(&(objectClass=person)(!(objectClass=Computer)'
 		} elseif ($Group) {
 			$SearchFilter = '(objectClass=Group)'
 		} elseif ($Computer) {
@@ -337,7 +337,7 @@ function Get-AD ([string]$Domain, [string]$OU, [string]$User, [string]$Group, [s
 		if ($OU) {
 			$SearchFilter = "(&(objectClass=OrganizationalUnit)($Filter=$OU))"
 		} elseif ($User) {
-			$SearchFilter = "(&(objectClass=User)(&($Filter=$User)(!(objectClass=Computer))))"
+			$SearchFilter = "(&(objectClass=User)(&($Filter=$User)(!(objectClass=Computer))"
 		} elseif ($Group) {
 			$SearchFilter = "(&(objectClass=Group)($Filter=$Group))"
 		} elseif ($Computer) {
@@ -388,7 +388,7 @@ function Get-AD ([string]$Domain, [string]$OU, [string]$User, [string]$Group, [s
 
 	$ADObject = New-Object PsObject
 
-	# Check if only Domain Information is Required
+	# Check if only Domain Information is ((Обязательно))
 
 	if($SearchFilter -eq $Null) {
 
