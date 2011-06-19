@@ -2,6 +2,11 @@
 <html>
 <head>
   <meta charset='utf-8'>
+  
+  <meta name="description" content="Блог имени меня :-). Тут собраны мои размышления обо всём, немного технических статей о PowerShell, Linux, Bash и прочих high-tech вещах. Добро пожаловать."/>
+  <meta name="keywords" content="nano,powershell,steve,illichevsky,scripting,steve illichevsky,live,life,russian,git,политика,скриптинг,администрирование"/>
+  <meta name="author" content="Степан Илличевский" />
+  <meta name="copyright" content="Copyright 2011 - Степан Илличевский"/>
 
   <title>stillru/PersonalPakage @ GitHub</title>
 
@@ -27,6 +32,531 @@
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+	
+	/*Undo browser defaults
+------------------------------------------------------------ */
+:link, :visited { text-decoration: none; }
+ul, ol { list-style: none; }
+h1, h2, h3, h4, h5, h6, pre, code, p { font-size: 1em; }
+ul, ol, dl, li, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, body, html, p, blockquote, fieldset, input { margin: 0; padding: 0; }
+a img, :link img, :visited img { border: none; }
+address { font-style: normal; }
+
+/*Body & Links
+------------------------------------------------------------ */
+body {
+	font-size: 62.5%;
+	font-family: Georgia, "Times New Roman", Times, Serif;
+	line-height: 2.2em;
+	color: #333;
+	background-color: #fff;
+}
+a:link, a:visited { color: #772124; }
+a:hover {
+	text-decoration: underline;
+	color: #58181b;
+}
+/*Basic Structure
+------------------------------------------------------------ */
+#wrapper {
+	width: 930px;
+	margin: 0 auto;
+	text-align: left;
+}
+#content {
+	float: left;
+	width: 600px;
+	padding: 10px 30px 20px 0;
+}
+#content2 {
+	float: left;
+	width: 930px;
+	padding: 10px 30px 20px 0;
+}
+#sidebar {
+	float: right;
+	width: 300px;
+	padding-bottom: 20px;
+}
+.thin-sidebar {
+	float: left;
+	width: 140px;
+}
+.spad { padding-right: 20px; }
+#footer {
+	clear: both;
+	padding-top: 5px;
+	border-top: 1px solid #eee;
+}
+.clear:after, li.comment:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+div.skip-content { display: none; }
+/*Header
+------------------------------------------------------------ */
+#header {
+	padding: 20px 0 10px 0;
+	border-bottom: 5px solid #333;
+}
+h1#title, div#title {
+	font-size: 4.6em;
+	font-weight: bold;
+	line-height: 1.3em;
+}
+div#title-logo { padding-bottom: 10px; }
+h1#title a:link, h1#title a:visited, div#title a:link, div#title a:visited	{ color: #444; }
+h1#title a:hover, div#title a:hover { color: #772124; text-decoration: none; }
+/*Description
+---------------------------------------*/
+#description { float: left; }
+#description h2 {
+	font-size: 1.2em;
+	font-weight: normal;
+	color: #666;
+}
+/*Nav
+---------------------------------------*/
+#nav {
+	float: right;
+	font-size: 1.5em;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans", Verdana, Arial, sans-serif;
+}
+#nav ul { position: relative; }
+#nav ul li {
+	float: left;
+	margin: 0 0 0 15px;
+}
+#nav ul li:first-child { margin: 0; }
+#nav li a {
+	padding-top: .1em;
+	color: #333;
+	text-decoration: none;
+}
+#nav li.current_page_item a, #nav li.current_page_parent a, #nav li.current_page_ancestor a, #nav li.current-cat a, #nav li a:hover {
+	color: #772124;
+	text-decoration: none;
+	border-top: 4px solid #772124;
+}
+/*Menu
+------------------------------------------------------------ */
+#menu { padding-bottom: 10px; }
+#menu img { border: 2px solid #eee; }
+.alert-box {
+	margin: 0 0 20px 0;
+	padding: 20px;
+	background: #f3f3f2;
+	border: 1px solid #e3e1db;
+}
+/*Post Styling
+------------------------------------------------------------ */
+/*Post Header
+---------------------------------------*/
+.post-header {
+	border-bottom: 4px double #eee;
+	padding-bottom: 7px;
+}
+.post-header h1, .post-header h2 {
+	font-size: 2.6em;
+	line-height: 1.1em;
+	font-weight: normal;
+}
+.post-header h1 a:link, .post-header h1 a:visited,.post-header h2 a:link, .post-header h2 a:visited	 { color: #444; }
+.post-header h1 a:hover, .post-header h2 a:hover { color: #772124; }
+.post .date {
+	float: right;
+	padding-top: 10px;
+	color: #757575;
+	font-size: 1.6em;
+	font-weight: normal;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans", Verdana, Arial, sans-serif;
+	text-transform: uppercase;
+}
+.post .date span {
+	color: #ddd;
+	font-weight: bold;
+}
+#single-date { float: none; }
+/*Post Meta
+---------------------------------------*/
+.meta {
+	margin: 10px 0 20px 0;
+	font-size: 1.2em;
+	color: #666;
+}
+.meta a:link, .meta a:visited {
+	color: #666;
+	font-style: normal;
+}
+.meta a:hover { color: #772124; }
+.tags {
+	float: right;
+	width: 400px;
+	text-align: right;
+	font-style: italic;
+}
+/*Post Body
+---------------------------------------*/
+.entry a:link, .entry a:visited, .alert-box a:link, .alert-box a:visited { text-decoration: underline; }
+.entry a:hover, .alert-box a:hover { text-decoration: none; }
+.entry { font-size: 1.3em; }
+.entry p { margin-bottom: 10px; }
+.entry p.notice {
+	padding: 15px;
+	background-color: #fffbcc;
+	border: 1px solid #f8f4c7;
+}
+.alert-box p { margin: 10px 0 0 0; }
+.entry h2, .entry h3, .entry h4 {
+	font-size: 1.3em;
+	padding: 15px 0 5px 0;
+}
+.entry h3 {
+	padding-top: 10px;
+	font-size: 1em;
+}
+.entry h4 {
+	padding-top: 10px;
+	font-size: .9em;
+}
+.alert-box h2, .alert-box h3, .alert-box h4 { margin: 0; padding: 0; }
+pre {
+	margin: 10px 0;
+	padding: 1em 10px;
+	overflow: auto;
+	background-color: #f3f3f3;
+	color: #000;
+}
+code {
+	padding: 2px 3px;
+	font: 1em Consolas, Courier New, sans-serif;
+	background-color: #f3f3f3;
+	color: #000;
+}
+.entry ul, .c-body ul { margin: 0 0 10px 10px; }
+.entry ul li, .c-body ul li {
+	display: block;
+	margin: 5px 0 0 0;
+	padding: 0 0 0 17px;
+	background: url(/images/list-star.gif) no-repeat 0 .3em;
+}
+.entry ol, .c-body ol { margin: 0 0 15px 30px; }
+.entry ol li ol li, .c-body ol li ol li {
+	font-size: .9em;
+	list-style-type: lower-roman;
+}
+.entry ol li, .c-body ol li {
+	margin: 10px 0 0 0;
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+.navigation {
+	padding: 10px 0;
+	font-size: 1.3em;
+}
+.index { padding: 0; }
+.float-quote {
+	float: left;
+	width: 300px;
+	padding: 15px;
+	margin: 10px 10px 0 0;
+	background: #eaeaea;
+	border-top: 4px solid #333;
+	border-bottom: 4px solid #333;
+}
+.entry .float-quote p {
+	margin: 0;
+	padding: 0 0 0 40px;
+	font-size: 1.2em;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans", Verdana, Arial, sans-serif;
+	line-height: 1.3em;
+	background: url(/images/float-quote.gif) no-repeat top left;
+}
+.highlight-box {
+	float: right;
+	margin: 0 0 10px 10px;
+	width: 200px;
+	padding: 10px;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans", Verdana, Arial, sans-serif;
+	border-top: 8px solid #000;
+	background: #772124;
+	color: #fff;
+}
+.highlight-box a:link, .highlight-box a:visited {
+	color: #fff;
+	text-decoration: underline;
+}
+.highlight-box a:hover { text-decoration: none; }
+.entry .highlight-box p {
+	margin: 10px 0;
+	line-height: 1.4em;
+	font-size: 1.1em;
+}
+.entry .highlight-box ul li {
+	font-size: 1.1em;
+	background: url(/images/list-square.gif) no-repeat 0 .4em;
+}
+.entry .highlight-box h2, .entry .highlight-box h3, .entry .highlight-box h4 {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+}
+.highlight-box h2 { text-transform: uppercase; }
+
+p {
+        margin: 10px 0;
+        line-height: 1.4em;
+        font-size: 1.1em;
+
+}
+/*Post Footer
+---------------------------------------*/
+.post-footer {
+	padding-bottom: 2px;
+	margin: 0 0 30px 0;
+	font-size: 1.1em;
+	font-style: italic;
+	text-align: right;
+	color: #666;
+	border-bottom: 1px solid #eee;
+}
+.post-footer a:link, .post-footer a:visited {
+	color: #333;
+	font-style: normal;
+}
+.post-footer a:hover { color: #772124; }
+/*Pages
+---------------------------------------*/
+h1.pagetitle, h2.pagetitle {
+	margin-bottom: 20px;
+	padding-bottom: 7px;
+	font-size: 2.6em;
+	line-height: 1.1em;
+	border-bottom: 4px double #eee;
+}
+blockquote {
+	font: 14px/20px italic Times, serif;
+	padding-left: 20px;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	padding-right: 10px;
+	margin: 5px;
+	background-image: url(/images/float-quote.gif);
+	background-position: middle left;
+	background-repeat: no-repeat;
+	/*text-indent: 23px;*/
+}
+/*Archives List
+---------------------------------------*/
+img.archive-comment {
+	float: right;
+	margin: 0 .5em .5em 0;
+}
+.entries {
+	font-size: 1.3em;
+	clear: both;
+}
+.entries ul {
+	margin: 0;
+	padding: 0 0 1px 0;
+	background: transparent url(/images/archives-dotted-line.gif) repeat-x bottom left;
+}
+.entries ul li {
+	padding-top: 1px;
+	background: transparent url(/images/archives-dotted-line.gif) repeat-x top left;
+}
+.entries ul li a {
+	display: block;
+	margin: 0;
+	padding: 7px 0;
+}
+.entries ul li a:hover {
+	background-color: #F8F8F7;
+	text-decoration: none;
+}
+.entries span {
+	display: block;
+	text-align: right;
+}
+.entries span.archdate, .entries a:hover span.archdate	{
+	float: left;
+	margin-right: 3em;
+	padding-left: .5em;
+	width: 3em;
+	color: #666;
+}
+.entries span.comments_number{
+	float: right;
+	margin-right: .5em;
+	width: 3em;
+	color: #666;
+}
+/*Sidebar
+------------------------------------------------------------ */
+#sidebar-image { padding-top: 20px; }
+#sidebar-image { font-size: 1.3em; }
+#sidebar-image p {
+	margin-bottom: 15px;
+	line-height: 1.6em;
+}
+h2.widgettitle {
+	padding: 25px 0 3px 0;
+	font-size: 1.4em;
+	font-weight: normal;
+	text-transform: uppercase;
+	letter-spacing: 1.05pt;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans", Verdana, Arial, sans-serif;
+	border-bottom: 1px solid #eee;
+}
+ul li.widget ul {
+	margin: 0;
+	font-size: 1.4em;
+}
+ul li.widget ul li ul {
+	margin-left: 5px;
+	font-size: 1em;
+}
+ul li.widget ul li {
+	padding: 8px 0;
+	border-bottom: 1px solid #eee;
+}
+ul li.widget ul li ul li { border-bottom: none; }
+ul li.widget ul li a {
+	display: block;
+	padding: 0 0 0 15px;
+	background: url(/images/list-item.gif) no-repeat 0 6px;
+}
+ul li.widget ul li a:hover { background-position: 0 -136px; }
+ul li.widget ul#recentcomments li a {
+	padding: 0;
+	background: none;
+}
+div.textwidget p {
+	font-size: 1.3em;
+	margin: 10px 0 0 0;
+}
+li.widget select { margin-top: 10px; }
+/*RSS Box
+---------------------------------------*/
+#rss-feed	 { padding-top: 10px; }
+#rss-feed p {
+	font-size: 1.3em;
+	line-height: 1.6em;
+}
+#rss-feed a.rss, #rss-feed a.email, #rss-feed a.twitter {
+	float: left;
+	font-size: 1.3em;
+	margin: 10px 10px 0 0;
+	display: block;
+	padding: 0 0 0 19px;
+	background: url(/images/feed-icon.png) no-repeat 0 .25em;
+}
+/*Default Alignment and Images
+------------------------------------------------------------ */
+.entry img.alignleft, .entry img.alignright, .entry img.aligncenter { border: 2px solid #eee; }
+.noborder { border: none; }
+.entry .alignright, .entry .alignright .float-quote { margin: 0 0 10px 15px; }
+.entry .alignleft, .entry .alignleft .highlight-box { margin: 0 15px 10px 0; }
+.wp-caption p {
+	font-style: italic;
+	color: #888;
+}
+/*Footer
+------------------------------------------------------------ */
+#footer {
+	color: #666;
+	font-size: 1.1em;
+}
+#footer p.right { float: right; }
+#footer a:link, #footer a:visited {
+	color: #666;
+	text-decoration: underline;
+}
+#footer a:hover { color: #772124; }
+/* Trackback css
+------------------------------------------------------------ */
+/* container */
+div.twitter-trackbacks{ }
+/* ul list */
+ul.ttw-inner{
+	padding:0;
+	margin:0;
+}
+ul.ttw-inner li{
+	border-bottom:silver 1px dotted;
+	float:left;
+	margin:1px 0 1px 0;
+	padding:2px 2px 4px 2px;
+	list-style-type:none;
+	position:relative;
+	height:48px;
+	overflow:hidden;
+	width:100%;
+}
+/* author img */
+ul.ttw-inner span.ttw-author-img{
+	display:block;
+	width:48px;
+	height:48px;
+	margin:0 5px 0 2px;
+	overflow:hidden;
+	left:0;
+	position:absolute;
+}
+/* author name */
+ul.ttw-inner strong a{
+	margin-right:5px;
+}
+/* tweet body */
+ul.ttw-inner span.ttw-body {
+	display:block;
+	margin-left:55px;
+	font-size: 1.3em;
+}
+/* tweet content */
+ul.ttw-inner span.ttw-content{}
+
+/* tweet meta : date, reply, retweet line */
+ul.ttw-inner span.ttw-meta {
+	color:#999999;
+	display:block;
+	font-size:0.764em;
+	margin:3px 0 0;
+}
+ul.ttw-inner span.ttw-meta a{
+	color:#999999;
+	text-decoration:none;
+}
+ul.ttw-inner span.ttw-meta a:hover{
+	text-decoration:underline;
+}
+/* customize reply link */
+ul.ttw-inner a.ttw-reply { }
+/* customize retweet link */
+ul.ttw-inner a.ttw-retweet { }
+
+/* customize links */
+ul.ttw-inner a.ttw-link { }
+/* customize @user links */
+ul.ttw-inner a.ttw-at { }
+/* customize #hashtags links */
+ul.ttw-inner a.ttw-hashtag { }
+
+/* Customize tweets of users with influence levels from 0 to 10 */
+li.ttw-inf-0, li.ttw-inf-1, li.ttw-inf-2{ }
+li.ttw-inf-3, li.ttw-inf-4, li.ttw-inf-5, li.ttw-inf-6{ 
+	background:#ececec
+}
+li.ttw-inf-7, li.ttw-inf-8, li.ttw-inf-9, li.ttw-inf-10{
+	background:#e0e0e0
+}
+
+/* Customize users image with influence levels from 0 to 10 */
+li.ttw-inf-0 img{}
+/* ...... */
+li.ttw-inf-10 img{}
+
+/* Customize users name with influence levels from 0 to 10 */
+li.ttw-inf-0 strong{}
+/* ...... */
+li.ttw-inf-10 strong{}
   </style>
   <script type="text/javascript">
 
@@ -46,8 +576,18 @@
 <body>
   <a href="http://github.com/stillru/PersonalPakage"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
-
+<div id="container">
+<div id="wrapper">
+      <div id="header" class="clear">
+        <h1 id="title"><a href="http://stillru.github.com">Степан Илличевский</a></h1>
+        <div id="description">
+          <h2>Сисадмин... иногда хороший...</h2>
+        </div>
+        <div id="nav">
+          {% include nav.html %}
+        </div>
+      </div>
+      <div>
     <div class="download">
       <a href="http://github.com/stillru/PersonalPakage/zipball/master">
         <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
@@ -92,5 +632,23 @@
     </div>
 
   </div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://twitter-trackbacks-widget.googlecode.com/files/jquery.twittertrackbacks-1.0.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+            $('div.twitter-trackbacks').twitterTrackbacks({
+                    header:'<h2>Twitter trackback</h2>'
+                    ,url:'http://stillru.github.com{{ page.url }}'
+                    ,n:8
+                    ,show_n:0
+                    ,inf_tip:0
+                    ,show_avatar:0
+                    ,show_author:1
+                    ,info:''
+            });
+    });
+</script>
+</div>
+</div>
 </body>
 </html>
