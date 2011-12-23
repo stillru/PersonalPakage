@@ -1,4 +1,5 @@
 #!/usr/bin/php
+# README - http://forum.itrm.ru/index.php?t=msg&goto=1042&rid=0
 <?php
 // vim: set foldmethod=indent:
 
