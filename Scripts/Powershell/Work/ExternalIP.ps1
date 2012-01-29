@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
     This script fetch webpage with external ip from web, prase it and send
-	email with it to system administrator.
+	email and jabber message with it to system administrator.
 .DESCRIPTION
     This script firsts creates a System.Net.WebClient object and
     download page from web. Then it's prase it to one string - external address.
@@ -9,7 +9,7 @@
 .NOTES
     File Name : ExternalIP.ps1
     Author : Steve Illichevsky - still.ru@gmail.com
-    Requires : PowerShell Version 2.0
+    Requires : PowerShell Version 2.0, PoshXmpp Snapin
 .LINK
     This script posted to:
 		https://github.com/stillru/PersonalPakage/blob/master/Scripts/Powershell/Work/ExternalIP.ps1
@@ -22,6 +22,8 @@
 .EXAMPLE
     Left as an exercise to the reader!
 .VERSION
+	v 0.2
+		+ Add Jabber-Send function. Need PoshXmpp.
 	v 0.1
 		+ Add sendm function for sending mail thru gmail.
 		+ Add event logging. Now without errors.
@@ -30,6 +32,23 @@
 		- Implement Error logging
 		- Switching between 2 gates
 #>
+
+# Some params
+$nowd = get-date -uformat "%d.%m.%y %H:%M"				# Date
+$url = "http://www.ip-details.com/"						# Url for webpage
+$webpagetxt = "C:\Users\$env:username\chek.txt"			# File for temp
+$lastchek = "C:\Users\$env:username\lastchek.txt"		# Lockfile
+$chek = gc $lastchek									# Last ip chek
+$NotifJabber = "XXX@example.ru"							# Jabber ID for notifications
+$JabberId = "notifications@somedomain.com"				# Jabber ID for sending message
+$JabberPassword = "XXX"									# Password from Jabber
+
+function Jabber-Send () 
+{
+PoshXmpp\New-Client $JabberId $JabberPassword
+PoshXmpp\Send-Message $NotifJabber $Body
+$PoshXmppClient.Close()
+}
 function Sendm () 
 {
 $SMTPServer = "smtp.gmail.com" 
@@ -46,13 +65,6 @@ $log.set_log("Application")
 $log.set_source("PSscript")
 $log.WriteEntry($msg,$type)
 } 
-
-# Some params
-$nowd = get-date -uformat "%d.%m.%y %H:%M"				# Date
-$url = "http://www.ip-details.com/"						# Url for webpage
-$webpagetxt = "C:\Users\$USER\chek.txt"					# File for temp. Need to be changed.
-$lastchek = "C:\Users\$USER\lastchek.txt"				# Lockfile. Need to be changed.
-$chek = gc $lastchek									# Last ip chek
 
 # Analog wget
 $webclient = new-object System.Net.WebClient
@@ -76,11 +88,13 @@ if ($extip -match "x.x.x.x") {							# Change to yours for home network
 	$Body = "$nowd - $extip - IP from home network."
 	Sendm
 	Write-EventLog ($Body)
+	Jabber-Send ($Body)
 } elseif ($extip -ne "x.x.x.x") {						# Change to yours
 	$Subject = "Notification from Somewhere" 
 	$Body = "$nowd - $extip - IP from Somwhere network."
 	Sendm
 	Write-EventLog ($Body)
+	Jabber-Send ($Body)
 	}
 }
 # Cleraing temp file
