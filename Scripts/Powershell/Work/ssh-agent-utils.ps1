@@ -96,7 +96,8 @@ $agent = Get-SshAgent
 if ($agent -eq 0) {
 	Write-Host "Starting SSH agent..."
 	Start-SshAgent		# Start agent
-	Add-SshKey			# Add my default key
+	Add-SshKey		# Add my default key
+	Add-sshkey ~/.ssh/git2
 } else {
 	Write-Host "SSH agent is running (PID $agent)"
 }
