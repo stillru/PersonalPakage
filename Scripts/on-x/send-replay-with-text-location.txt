@@ -1,0 +1,100 @@
+// 
+// Send Replay with location script for ON{x}
+// 
+// Version 0.1
+// + Initial commit
+//
+
+var msgTxt = "where are you?";   // provides a rough decription of the current location in the SMS text
+var msgTxtExactly = "where exactly are you?";   // provides the exact location in the SMS text
+var msgPrefix = "I'm here: ";   // SMS body prefix
+var msgNotification = "Location provided";   // shows a Notification on your phone if a location was shared. make "" to disable all notifications
+var notAvail = "Location not available";   // will be shown when the JSON-file is OK but there still is no information to provide
+
+var cellLoc = notAvail;
+var cellSubloc = notAvail;
+locExactlyBOOL = false;
+	
+device.messaging.on('smsReceived', function (sms) {
+	if (sms.data.body.toLowerCase().trim() === msgTxt || sms.data.body.toLowerCase().trim() === msgTxtExactly) {
+		console.log('Started: sms-returns-location-with-gmaps-link. \"' +  sms.data.body.trim() + '\" from \"' +  sms.data.from + '\".');
+
+		if(sms.data.body.toLowerCase().trim() === msgTxtExactly) {
+			locExactlyBOOL = true;
+		}
+
+		var locListener = device.location.createListener('CELL', 100);
+		locListener.on('changed', function (signal) {
+			locListener.stop();
+														
+			var lat = signal.location.latitude.toFixed(5);
+			var lon = signal.location.longitude.toFixed(5);
+			var mapUrlPattern = "http://maps.google.com/maps?q=loc:lat+lon";
+			var mapUrl =  mapUrlPattern.replace(/lat/g, lat).replace(/lon/g, lon);
+							
+			device.ajax(
+				{
+					url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lon+'&sensor=true'
+				},
+				function onSuccess(body, textStatus, response) {
+					var smsBody;
+					var jsonRep = JSON.parse(body);
+					
+					if(jsonRep.status !== "OK") {
+						if(msgNotification !== "")
+							device.notifications.createNotification('JSON-file status not OK').show();
+						console.error('JSON file did not answer with, status: "OK" !');
+					} else {
+						if(!locExactlyBOOL) {
+							for (i=0;i<jsonRep.results[0].address_components.length;i++){
+								for (j=0;j<jsonRep.results[0].address_components[i].types.length;j++){
+									if(jsonRep.results[0].address_components[i].types[j] === "locality") {
+										cellLoc = jsonRep.results[0].address_components[i].long_name;
+									} else if(jsonRep.results[0].address_components[i].types[j] === "sublocality") {
+										cellSubloc = jsonRep.results[0].address_components[i].long_name;
+									}
+								}
+							}
+							if(cellSubloc === notAvail) {
+								for(i=0;i<jsonRep.results[0].address_components.length;i++) {
+									for(j=0;j<jsonRep.results[0].address_components[i].types.length;j++) {
+										if (jsonRep.results[0].address_components[i].types[j] === "administrative_area_level_2") {
+											cellSubloc = jsonRep.results[0].address_components[i].short_name;
+										} else if (jsonRep.results[0].address_components[i].types[j] === "administrative_area_level_1") {
+											cellSubloc += ', ';
+											cellSubloc += jsonRep.results[0].address_components[i].short_name;
+										}
+									}
+								}
+							}
+							smsBody = cellLoc + ', ' + cellSubloc;
+						} else {
+							cellLoc = jsonRep.results[0].formatted_address;
+							smsBody = cellLoc;
+						}
+					}
+
+					device.messaging.sendSms({
+						to: sms.data.from,
+						body: msgPrefix + smsBody + '\n\n' + mapUrl
+					},
+					function (err) {
+						if (err) {
+							console.error('Error sending text message after "' + sms.data.body.trim() + '", from: "' + sms.data.from + '" ; ' + JSON.stringify(err));
+						}
+					});
+					if(msgNotification !== "")
+						device.notifications.createNotification(msgNotification).show();
+					console.log('Completed: sms-returns-location-with-gmaps-link. \"' +  sms.data.body.trim() + '\" from \"' +  sms.data.from + '\". ' + cellLoc + ', ' + cellSubloc);
+				},
+				function onError(textStatus, response) {
+				  var error = {};
+				  error.message = textStatus;
+				  error.statusCode = response.status;
+				  console.error('AJAX - error: ',error);
+				});
+				
+		});
+		locListener.start();
+	}
+});
