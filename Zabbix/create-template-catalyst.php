@@ -6,7 +6,7 @@
 ?>
 <?php echo '<'.'?xml version="1.0"?'.'>'; ?>
 
-<?php 
+<?php
 
 $data = array(
 	'host_name' => 'template-catalyst',
@@ -25,7 +25,6 @@ $fp = fopen('php://stdin', 'r');
 
 while($_row = fgets($fp)) {
 	$row = trim($_row);
-	
 	// search for name
 	if(strpos($row, 'SNMPv2-SMI::mib-2.47.1.1.1.1.13.1 ') === 0) {
 		list($skip, $name ) = explode('STRING: ', $row);
@@ -36,7 +35,6 @@ while($_row = fgets($fp)) {
 			_log('WARNING: cannot parse short device name');
 		}
 	}
-
 	// search for port description
 	if( strpos($row, 'IF-MIB::ifDescr.') === 0) {
 		if(preg_match('/^IF-MIB::ifDescr.(\d+) = STRING: (.*)$/', $row, $m)) {
@@ -49,9 +47,7 @@ while($_row = fgets($fp)) {
 
 
 }
-
 echo render($data);
-
 
 function _log($msg) // {{{
 {
@@ -64,7 +60,7 @@ function _log($msg) // {{{
 	}
 	fputs($stderr_fd, $msg."\n");
 } // }}}
- 
+
 function render($data)
 {
 	extract($data);
@@ -328,7 +324,6 @@ function render($data)
 				</item>
 			</items>
 			<triggers><?php foreach($port_list as $pid => $pdesc) { ?>
-					
 					<trigger>
 						<description><?= $pdesc['short_name']; ?> input errors</description>
 						<type>0</type>
@@ -428,10 +423,8 @@ function render($data)
 		</dependency>
 	<?php } ?></dependencies>
 </zabbix_export>
-<?php 
-
+<?php
 	return ob_get_clean();
 } // ~ render
-
 ?>
 
